@@ -1099,6 +1099,16 @@
       "full_syntax": "F0 (MV) DT90020, D"
     },
     {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    },
+    {
       "fun_no": "F1",
       "symbolic_mnemonic": "DMV",
       "operands_syntax": "S, D",
@@ -1107,6 +1117,46 @@
       "category": "Transfer instructions",
       "manual_ref": "\"P. 10-5\"",
       "full_syntax": "F1 (DMV) S, D"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "S, DT90300",
+      "name": "High-speed counter elapsed value read",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) S, DT90300"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90300, D",
+      "name": "High-speed counter elapsed value write",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90300, D"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "S, DT90348",
+      "name": "Pulse output elapsed value read",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) S, DT90348"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
     },
     {
       "fun_no": "F2",
@@ -1247,26 +1297,6 @@
       "category": "Transfer instructions",
       "manual_ref": "\"P. 10-39\"",
       "full_syntax": "F18 (BXCH) D1, D2, D3"
-    },
-    {
-      "fun_no": "F190",
-      "symbolic_mnemonic": "MV3",
-      "operands_syntax": "S1, S2, S3, D",
-      "name": "Three 16-bit data transfer to single area",
-      "steps": "10",
-      "category": "Transfer instructions",
-      "manual_ref": "\"P. 10-41\"",
-      "full_syntax": "F190 (MV3) S1, S2, S3, D"
-    },
-    {
-      "fun_no": "F191",
-      "symbolic_mnemonic": "DMV3",
-      "operands_syntax": "S1, S2, S3, D",
-      "name": "Three 32-bit data transfer to single area",
-      "steps": "16",
-      "category": "Transfer instructions",
-      "manual_ref": "\"P. 10-43\"",
-      "full_syntax": "F191 (DMV3) S1, S2, S3, D"
     },
     {
       "fun_no": "F20",
@@ -1659,26 +1689,6 @@
       "full_syntax": "F64 (BCMP) S1, S2, S3"
     },
     {
-      "fun_no": "F373",
-      "symbolic_mnemonic": "DTR",
-      "operands_syntax": "S, D",
-      "name": "16-bit data revision detection",
-      "steps": "6",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 13-19\"",
-      "full_syntax": "F373 (DTR) S, D"
-    },
-    {
-      "fun_no": "F374",
-      "symbolic_mnemonic": "DDTR",
-      "operands_syntax": "S, D",
-      "name": "32-bit data revision detection",
-      "steps": "6",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 13-21\"",
-      "full_syntax": "F374 (DDTR) S, D"
-    },
-    {
       "fun_no": "F65",
       "symbolic_mnemonic": "WAN",
       "operands_syntax": "S1, S2, D",
@@ -1727,56 +1737,6 @@
       "category": "Data conversion instructions",
       "manual_ref": "\"P. 14-10\"",
       "full_syntax": "F69 (WUNI) S1, S2, S3, D"
-    },
-    {
-      "fun_no": "F215",
-      "symbolic_mnemonic": "DAND",
-      "operands_syntax": "S1, S2, D",
-      "name": "32-bit data AND",
-      "steps": "12",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 14-12\"",
-      "full_syntax": "F215 (DAND) S1, S2, D"
-    },
-    {
-      "fun_no": "F216",
-      "symbolic_mnemonic": "DOR",
-      "operands_syntax": "S1, S2, D",
-      "name": "32-bit data OR",
-      "steps": "12",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 14-14\"",
-      "full_syntax": "F216 (DOR) S1, S2, D"
-    },
-    {
-      "fun_no": "F217",
-      "symbolic_mnemonic": "DXOR",
-      "operands_syntax": "S1, S2, D",
-      "name": "32-bit data exclusive OR",
-      "steps": "12",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 14-16\"",
-      "full_syntax": "F217 (DXOR) S1, S2, D"
-    },
-    {
-      "fun_no": "F218",
-      "symbolic_mnemonic": "DXNR",
-      "operands_syntax": "S1, S2, D",
-      "name": "32-bit data exclusive NOR",
-      "steps": "12",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 14-18\"",
-      "full_syntax": "F218 (DXNR) S1, S2, D"
-    },
-    {
-      "fun_no": "F219",
-      "symbolic_mnemonic": "DUNI",
-      "operands_syntax": "S1, S2, S3, D",
-      "name": "[(S1 AND S3) OR (S2 AND S3) = D] (32-bit)",
-      "steps": "16",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 14-20\"",
-      "full_syntax": "F219 (DUNI) S1, S2, S3, D"
     },
     {
       "fun_no": "F70",
@@ -2019,6 +1979,16 @@
       "full_syntax": "F94 (DIST) S, n, D"
     },
     {
+      "fun_no": "F95",
+      "symbolic_mnemonic": "ASC",
+      "operands_syntax": "M,D",
+      "name": "Convert character constant to ASCII code",
+      "steps": "15",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-2\"",
+      "full_syntax": "F95 (ASC) M,D"
+    },
+    {
       "fun_no": "F96",
       "symbolic_mnemonic": "SRC",
       "operands_syntax": "S1, S2, S3",
@@ -2039,84 +2009,24 @@
       "full_syntax": "F97 (DSRC) S1, S2, S3, S4"
     },
     {
-      "fun_no": "F230",
-      "symbolic_mnemonic": "TMSEC",
-      "operands_syntax": "S, D",
-      "name": "Time to second conversion",
-      "steps": "6",
-      "category": "Data conversion instructions",
-      "manual_ref": "\"P. 15-66\"",
-      "full_syntax": "F230 (TMSEC) S, D"
+      "fun_no": "F98",
+      "symbolic_mnemonic": "CMPR",
+      "operands_syntax": "D1, D2, D3",
+      "name": "Compress shift read",
+      "steps": "7",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-2\"",
+      "full_syntax": "F98 (CMPR) D1, D2, D3"
     },
     {
-      "fun_no": "F231",
-      "symbolic_mnemonic": "SECTM",
-      "operands_syntax": "S, D",
-      "name": "Second to time conversion",
-      "steps": "6",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-69\"",
-      "full_syntax": "F231 (SECTM) S, D"
-    },
-    {
-      "fun_no": "F235",
-      "symbolic_mnemonic": "GRY",
-      "operands_syntax": "S, D",
-      "name": "16-bit data to gray code conversion",
-      "steps": "6",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-72\"",
-      "full_syntax": "F235 (GRY) S, D"
-    },
-    {
-      "fun_no": "F236",
-      "symbolic_mnemonic": "DGRY",
-      "operands_syntax": "S, D",
-      "name": "32-bit data to gray code conversion",
-      "steps": "8",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-73\"",
-      "full_syntax": "F236 (DGRY) S, D"
-    },
-    {
-      "fun_no": "F237",
-      "symbolic_mnemonic": "GBIN",
-      "operands_syntax": "S, D",
-      "name": "Gray code to 16-bit data conversion",
-      "steps": "6",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-74\"",
-      "full_syntax": "F237 (GBIN) S, D"
-    },
-    {
-      "fun_no": "F238",
-      "symbolic_mnemonic": "DGBIN",
-      "operands_syntax": "S, D",
-      "name": "Gray code to 32-bit data conversion",
-      "steps": "8",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-75\"",
-      "full_syntax": "F238 (DGBIN) S, D"
-    },
-    {
-      "fun_no": "F240",
-      "symbolic_mnemonic": "COLM",
-      "operands_syntax": "S1, S2, D",
-      "name": "Bit line to bit column conversion",
-      "steps": "8",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-77\"",
-      "full_syntax": "F240 (COLM) S1, S2, D"
-    },
-    {
-      "fun_no": "F241",
-      "symbolic_mnemonic": "LINE",
-      "operands_syntax": "S1, S2, D",
-      "name": "Bit column to bit line conversion",
-      "steps": "8",
-      "category": "Data shift instruction",
-      "manual_ref": "\"P. 15-79\"",
-      "full_syntax": "F241 (LINE) S1, S2, D"
+      "fun_no": "F99",
+      "symbolic_mnemonic": "CMPW",
+      "operands_syntax": "S1, D, S2",
+      "name": "Compress shift write",
+      "steps": "7",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-6\"",
+      "full_syntax": "F99 (CMPW) S1, D, S2"
     },
     {
       "fun_no": "F100",
@@ -2239,6 +2149,36 @@
       "full_syntax": "F113 (WBSL) D1, D2"
     },
     {
+      "fun_no": "F115",
+      "symbolic_mnemonic": "FIFT",
+      "operands_syntax": "n, D",
+      "name": "FIFO buffer definition",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-11\"",
+      "full_syntax": "F115 (FIFT) n, D"
+    },
+    {
+      "fun_no": "F116",
+      "symbolic_mnemonic": "FIFR",
+      "operands_syntax": "S, D",
+      "name": "FIFO data read",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-14\"",
+      "full_syntax": "F116 (FIFR) S, D"
+    },
+    {
+      "fun_no": "F117",
+      "symbolic_mnemonic": "FIFW",
+      "operands_syntax": "S, D",
+      "name": "FIFO data write",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-18\"",
+      "full_syntax": "F117 (FIFW) S, D"
+    },
+    {
       "fun_no": "F120",
       "symbolic_mnemonic": "ROR",
       "operands_syntax": "D, n",
@@ -2317,56 +2257,6 @@
       "category": "Bit manipulation instructions",
       "manual_ref": "\"P. 17-16\"",
       "full_syntax": "F128 (DRCL) D, n"
-    },
-    {
-      "fun_no": "F98",
-      "symbolic_mnemonic": "CMPR",
-      "operands_syntax": "D1, D2, D3",
-      "name": "Compress shift read",
-      "steps": "7",
-      "category": "Bit manipulation instructions",
-      "manual_ref": "\"P. 18-2\"",
-      "full_syntax": "F98 (CMPR) D1, D2, D3"
-    },
-    {
-      "fun_no": "F99",
-      "symbolic_mnemonic": "CMPW",
-      "operands_syntax": "S1, D, S2",
-      "name": "Compress shift write",
-      "steps": "7",
-      "category": "Bit manipulation instructions",
-      "manual_ref": "\"P. 18-6\"",
-      "full_syntax": "F99 (CMPW) S1, D, S2"
-    },
-    {
-      "fun_no": "F115",
-      "symbolic_mnemonic": "FIFT",
-      "operands_syntax": "n, D",
-      "name": "FIFO buffer definition",
-      "steps": "5",
-      "category": "Bit manipulation instructions",
-      "manual_ref": "\"P. 18-11\"",
-      "full_syntax": "F115 (FIFT) n, D"
-    },
-    {
-      "fun_no": "F116",
-      "symbolic_mnemonic": "FIFR",
-      "operands_syntax": "S, D",
-      "name": "FIFO data read",
-      "steps": "5",
-      "category": "Bit manipulation instructions",
-      "manual_ref": "\"P. 18-14\"",
-      "full_syntax": "F116 (FIFR) S, D"
-    },
-    {
-      "fun_no": "F117",
-      "symbolic_mnemonic": "FIFW",
-      "operands_syntax": "S, D",
-      "name": "FIFO data write",
-      "steps": "5",
-      "category": "Bit manipulation instructions",
-      "manual_ref": "\"P. 18-18\"",
-      "full_syntax": "F117 (FIFW) S, D"
     },
     {
       "fun_no": "F130",
@@ -2479,6 +2369,146 @@
       "full_syntax": "F143 (IORF) D1, D2"
     },
     {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P.21-4\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-12\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-22\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-4\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-10\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-14\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MC protocol master].",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-20\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P.21-8\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-17\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-28\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-7\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-12\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-17\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MC protocol master]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-23\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
       "fun_no": "F147",
       "symbolic_mnemonic": "PR",
       "operands_syntax": "S, D",
@@ -2529,196 +2559,6 @@
       "full_syntax": "F151 (WRT) S1, S2, n, D"
     },
     {
-      "fun_no": "F157",
-      "symbolic_mnemonic": "CADD",
-      "operands_syntax": "S1, S2, D",
-      "name": "Calendar data addition",
-      "steps": "9",
-      "category": "Data receive instruction [MEWTOCOL master]",
-      "manual_ref": "\"P. 20-23\"",
-      "full_syntax": "F157 (CADD) S1, S2, D"
-    },
-    {
-      "fun_no": "F158",
-      "symbolic_mnemonic": "CSUB",
-      "operands_syntax": "S1, S2, D",
-      "name": "Calendar data subtraction",
-      "steps": "9",
-      "category": "Data receive instruction [MEWTOCOL master]",
-      "manual_ref": "\"P. 20-26\"",
-      "full_syntax": "F158 (CSUB) S1, S2, D"
-    },
-    {
-      "fun_no": "F160",
-      "symbolic_mnemonic": "DSQR",
-      "operands_syntax": "S, D",
-      "name": "32-bit data square root",
-      "steps": "7",
-      "category": "Data receive instruction [MEWTOCOL master]",
-      "manual_ref": "\"P. 20-31\"",
-      "full_syntax": "F160 (DSQR) S, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MEWTOCOL master]",
-      "steps": "9",
-      "category": "Data receive instruction [MEWTOCOL master]",
-      "manual_ref": "\"P.21-4\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MEWTOCOL master]",
-      "steps": "9",
-      "category": "Data receive instruction [MEWTOCOL master]",
-      "manual_ref": "\"P.21-8\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MODBUS master: Function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.21-12\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MODBUS master: Function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.21-17\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MODBUS master: No function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.21-22\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MODBUS master: No function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.21-28\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F159",
-      "symbolic_mnemonic": "MTRN",
-      "operands_syntax": "S, n, D",
-      "name": "General-purpose communication instructions",
-      "steps": "7",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.21-36\"",
-      "full_syntax": "F159 (MTRN) S, n, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MEWTOCOL master]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-4\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MEWTOCOL master]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-7\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MODBUS master: Function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-10\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MODBUS master: Function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-12\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MODBUS master: No function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-14\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MODBUS master: No function code specification]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-17\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F145",
-      "symbolic_mnemonic": "SEND",
-      "operands_syntax": "S1, S2, D, N",
-      "name": "Data send instruction [MC protocol master].",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-20\"",
-      "full_syntax": "F145 (SEND) S1, S2, D, N"
-    },
-    {
-      "fun_no": "F146",
-      "symbolic_mnemonic": "RECV",
-      "operands_syntax": "S1, S2, N, D",
-      "name": "Data receive instruction [MC protocol master]",
-      "steps": "9",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-23\"",
-      "full_syntax": "F146 (RECV) S1, S2, N, D"
-    },
-    {
-      "fun_no": "F159",
-      "symbolic_mnemonic": "MTRN",
-      "operands_syntax": "S, n, D",
-      "name": "General-purpose communication instructions",
-      "steps": "7",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.22-26\"",
-      "full_syntax": "F159 (MTRN) S, n, D"
-    },
-    {
       "fun_no": "F155",
       "symbolic_mnemonic": "SMPL",
       "operands_syntax": "",
@@ -2739,34 +2579,64 @@
       "full_syntax": "F156 (STRG)"
     },
     {
-      "fun_no": "F0",
-      "symbolic_mnemonic": "MV",
-      "operands_syntax": "S, DT90052",
-      "name": "High-speed counter control",
-      "steps": "5",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.24-2\"",
-      "full_syntax": "F0 (MV) S, DT90052"
+      "fun_no": "F157",
+      "symbolic_mnemonic": "CADD",
+      "operands_syntax": "S1, S2, D",
+      "name": "Calendar data addition",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-23\"",
+      "full_syntax": "F157 (CADD) S1, S2, D"
     },
     {
-      "fun_no": "F1",
-      "symbolic_mnemonic": "DMV",
-      "operands_syntax": "S, DT90300",
-      "name": "High-speed counter elapsed value read",
-      "steps": "7",
-      "category": "High-speed counter instructions",
-      "manual_ref": "\"P.24-4\"",
-      "full_syntax": "F1 (DMV) S, DT90300"
+      "fun_no": "F158",
+      "symbolic_mnemonic": "CSUB",
+      "operands_syntax": "S1, S2, D",
+      "name": "Calendar data subtraction",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-26\"",
+      "full_syntax": "F158 (CSUB) S1, S2, D"
     },
     {
-      "fun_no": "F1",
-      "symbolic_mnemonic": "DMV",
-      "operands_syntax": "DT90300, D",
-      "name": "High-speed counter elapsed value write",
+      "fun_no": "F159",
+      "symbolic_mnemonic": "MTRN",
+      "operands_syntax": "S, n, D",
+      "name": "General-purpose communication instructions",
       "steps": "7",
       "category": "High-speed counter instructions",
-      "manual_ref": "\"P.24-4\"",
-      "full_syntax": "F1 (DMV) DT90300, D"
+      "manual_ref": "\"P.21-36\"",
+      "full_syntax": "F159 (MTRN) S, n, D"
+    },
+    {
+      "fun_no": "F159",
+      "symbolic_mnemonic": "MTRN",
+      "operands_syntax": "S, n, D",
+      "name": "General-purpose communication instructions",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-26\"",
+      "full_syntax": "F159 (MTRN) S, n, D"
+    },
+    {
+      "fun_no": "F160",
+      "symbolic_mnemonic": "DSQR",
+      "operands_syntax": "S, D",
+      "name": "32-bit data square root",
+      "steps": "7",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-31\"",
+      "full_syntax": "F160 (DSQR) S, D"
+    },
+    {
+      "fun_no": "F165",
+      "symbolic_mnemonic": "CAM0",
+      "operands_syntax": "S",
+      "name": "Cam control",
+      "steps": "3",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P.24-5\"",
+      "full_syntax": "F165 (CAM0) S"
     },
     {
       "fun_no": "F166",
@@ -2789,14 +2659,34 @@
       "full_syntax": "F167 (HC1R) n, S, D"
     },
     {
-      "fun_no": "F165",
-      "symbolic_mnemonic": "CAM0",
-      "operands_syntax": "S",
-      "name": "Cam control",
-      "steps": "3",
-      "category": "Character String Instructions",
-      "manual_ref": "\"P.24-5\"",
-      "full_syntax": "F165 (CAM0) S"
+      "fun_no": "F171",
+      "symbolic_mnemonic": "SPDH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (Trapezoidal control)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-3\"",
+      "full_syntax": "F171 (SPDH) S, n"
+    },
+    {
+      "fun_no": "F171",
+      "symbolic_mnemonic": "SPDH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (Home return)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-9\"",
+      "full_syntax": "F171 (SPDH) S, n"
+    },
+    {
+      "fun_no": "F172",
+      "symbolic_mnemonic": "PLSH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (JOG operation)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-14\"",
+      "full_syntax": "F172 (PLSH) S, n"
     },
     {
       "fun_no": "F173",
@@ -2819,14 +2709,184 @@
       "full_syntax": "F173 (PWMH) S, n"
     },
     {
-      "fun_no": "F95",
-      "symbolic_mnemonic": "ASC",
-      "operands_syntax": "M,D",
-      "name": "Convert character constant to ASCII code",
-      "steps": "15",
-      "category": "Character String Instructions",
-      "manual_ref": "\"P. 25-2\"",
-      "full_syntax": "F95 (ASC) M,D"
+      "fun_no": "F174",
+      "symbolic_mnemonic": "SP0H",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (Selectable data table control operation)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-17\"",
+      "full_syntax": "F174 (SP0H) S, n"
+    },
+    {
+      "fun_no": "F175",
+      "symbolic_mnemonic": "SPSH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (linear interpolation)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-22\"",
+      "full_syntax": "F175 (SPSH) S, n"
+    },
+    {
+      "fun_no": "F183",
+      "symbolic_mnemonic": "DSTM",
+      "operands_syntax": "S, D",
+      "name": "Auxiliary timer (32-bit)",
+      "steps": "7",
+      "category": "Basic function instruction",
+      "manual_ref": "P.3-571",
+      "full_syntax": "F183 (DSTM) S, D"
+    },
+    {
+      "fun_no": "F190",
+      "symbolic_mnemonic": "MV3",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Three 16-bit data transfer to single area",
+      "steps": "10",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-41\"",
+      "full_syntax": "F190 (MV3) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F191",
+      "symbolic_mnemonic": "DMV3",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Three 32-bit data transfer to single area",
+      "steps": "16",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-43\"",
+      "full_syntax": "F191 (DMV3) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F215",
+      "symbolic_mnemonic": "DAND",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data AND",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-12\"",
+      "full_syntax": "F215 (DAND) S1, S2, D"
+    },
+    {
+      "fun_no": "F216",
+      "symbolic_mnemonic": "DOR",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data OR",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-14\"",
+      "full_syntax": "F216 (DOR) S1, S2, D"
+    },
+    {
+      "fun_no": "F217",
+      "symbolic_mnemonic": "DXOR",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data exclusive OR",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-16\"",
+      "full_syntax": "F217 (DXOR) S1, S2, D"
+    },
+    {
+      "fun_no": "F218",
+      "symbolic_mnemonic": "DXNR",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data exclusive NOR",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-18\"",
+      "full_syntax": "F218 (DXNR) S1, S2, D"
+    },
+    {
+      "fun_no": "F219",
+      "symbolic_mnemonic": "DUNI",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "[(S1 AND S3) OR (S2 AND S3) = D] (32-bit)",
+      "steps": "16",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-20\"",
+      "full_syntax": "F219 (DUNI) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F230",
+      "symbolic_mnemonic": "TMSEC",
+      "operands_syntax": "S, D",
+      "name": "Time to second conversion",
+      "steps": "6",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-66\"",
+      "full_syntax": "F230 (TMSEC) S, D"
+    },
+    {
+      "fun_no": "F231",
+      "symbolic_mnemonic": "SECTM",
+      "operands_syntax": "S, D",
+      "name": "Second to time conversion",
+      "steps": "6",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-69\"",
+      "full_syntax": "F231 (SECTM) S, D"
+    },
+    {
+      "fun_no": "F235",
+      "symbolic_mnemonic": "GRY",
+      "operands_syntax": "S, D",
+      "name": "16-bit data to gray code conversion",
+      "steps": "6",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-72\"",
+      "full_syntax": "F235 (GRY) S, D"
+    },
+    {
+      "fun_no": "F236",
+      "symbolic_mnemonic": "DGRY",
+      "operands_syntax": "S, D",
+      "name": "32-bit data to gray code conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-73\"",
+      "full_syntax": "F236 (DGRY) S, D"
+    },
+    {
+      "fun_no": "F237",
+      "symbolic_mnemonic": "GBIN",
+      "operands_syntax": "S, D",
+      "name": "Gray code to 16-bit data conversion",
+      "steps": "6",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-74\"",
+      "full_syntax": "F237 (GBIN) S, D"
+    },
+    {
+      "fun_no": "F238",
+      "symbolic_mnemonic": "DGBIN",
+      "operands_syntax": "S, D",
+      "name": "Gray code to 32-bit data conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-75\"",
+      "full_syntax": "F238 (DGBIN) S, D"
+    },
+    {
+      "fun_no": "F240",
+      "symbolic_mnemonic": "COLM",
+      "operands_syntax": "S1, S2, D",
+      "name": "Bit line to bit column conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-77\"",
+      "full_syntax": "F240 (COLM) S1, S2, D"
+    },
+    {
+      "fun_no": "F241",
+      "symbolic_mnemonic": "LINE",
+      "operands_syntax": "S1, S2, D",
+      "name": "Bit column to bit line conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-79\"",
+      "full_syntax": "F241 (LINE) S1, S2, D"
     },
     {
       "fun_no": "F250",
@@ -3519,6 +3579,26 @@
       "full_syntax": "F356 (EZPID) S1, S2, S3, S4"
     },
     {
+      "fun_no": "F373",
+      "symbolic_mnemonic": "DTR",
+      "operands_syntax": "S, D",
+      "name": "16-bit data revision detection",
+      "steps": "6",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 13-19\"",
+      "full_syntax": "F373 (DTR) S, D"
+    },
+    {
+      "fun_no": "F374",
+      "symbolic_mnemonic": "DDTR",
+      "operands_syntax": "S, D",
+      "name": "32-bit data revision detection",
+      "steps": "6",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 13-21\"",
+      "full_syntax": "F374 (DDTR) S, D"
+    },
+    {
       "fun_no": "F380",
       "symbolic_mnemonic": "POSST",
       "operands_syntax": "S1, S2, S3",
@@ -3577,76 +3657,6 @@
       "category": "Logging/trace control instruction",
       "manual_ref": "\"P. 30-11\"",
       "full_syntax": "F385 (PTBLW) S1, S2, n, D"
-    },
-    {
-      "fun_no": "F1",
-      "symbolic_mnemonic": "DMV",
-      "operands_syntax": "S, DT90348",
-      "name": "Pulse output elapsed value read",
-      "steps": "7",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.24-4\"",
-      "full_syntax": "F1 (DMV) S, DT90348"
-    },
-    {
-      "fun_no": "F1",
-      "symbolic_mnemonic": "DMV",
-      "operands_syntax": "DT90348, D",
-      "name": "Pulse output elapsed value write",
-      "steps": "7",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.24-4\"",
-      "full_syntax": "F1 (DMV) DT90348, D"
-    },
-    {
-      "fun_no": "F171",
-      "symbolic_mnemonic": "SPDH",
-      "operands_syntax": "S, n",
-      "name": "Pulse output (Trapezoidal control)",
-      "steps": "5",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.31-3\"",
-      "full_syntax": "F171 (SPDH) S, n"
-    },
-    {
-      "fun_no": "F171",
-      "symbolic_mnemonic": "SPDH",
-      "operands_syntax": "S, n",
-      "name": "Pulse output (Home return)",
-      "steps": "5",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.31-9\"",
-      "full_syntax": "F171 (SPDH) S, n"
-    },
-    {
-      "fun_no": "F172",
-      "symbolic_mnemonic": "PLSH",
-      "operands_syntax": "S, n",
-      "name": "Pulse output (JOG operation)",
-      "steps": "5",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.31-14\"",
-      "full_syntax": "F172 (PLSH) S, n"
-    },
-    {
-      "fun_no": "F174",
-      "symbolic_mnemonic": "SP0H",
-      "operands_syntax": "S, n",
-      "name": "Pulse output (Selectable data table control operation)",
-      "steps": "5",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.31-17\"",
-      "full_syntax": "F174 (SP0H) S, n"
-    },
-    {
-      "fun_no": "F175",
-      "symbolic_mnemonic": "SPSH",
-      "operands_syntax": "S, n",
-      "name": "Pulse output (linear interpolation)",
-      "steps": "5",
-      "category": "Logging/trace control instruction",
-      "manual_ref": "\"P.31-22\"",
-      "full_syntax": "F175 (SPSH) S, n"
     },
     {
       "fun_no": "F420",
@@ -3909,6 +3919,26 @@
       "full_syntax": "F465 (ETSTAT) S1, S2, D"
     },
     {
+      "fun_no": "F465",
+      "symbolic_mnemonic": "ETSTAT",
+      "operands_syntax": "S1, S2, D",
+      "name": "Information acquisition of EtherNet/IP",
+      "steps": "8-520",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-2\"",
+      "full_syntax": "F465 (ETSTAT) S1, S2, D"
+    },
+    {
+      "fun_no": "F465",
+      "symbolic_mnemonic": "ETSTAT",
+      "operands_syntax": "S1, S2, D",
+      "name": "EtherNet/IP information acquisition: FTP",
+      "steps": "8-520",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-2\"",
+      "full_syntax": "F465 (ETSTAT) S1, S2, D"
+    },
+    {
       "fun_no": "P466",
       "symbolic_mnemonic": "NTPcREQ",
       "operands_syntax": "S1, S2, D",
@@ -3949,14 +3979,54 @@
       "full_syntax": "F469 (UNITSEL) S1, S2"
     },
     {
-      "fun_no": "F465",
-      "symbolic_mnemonic": "ETSTAT",
-      "operands_syntax": "S1, S2, D",
-      "name": "Information acquisition of EtherNet/IP",
-      "steps": "8-520",
-      "category": "EtherNet/IP instructions (C32ET only)",
-      "manual_ref": "\"P. 35-2\"",
-      "full_syntax": "F465 (ETSTAT) S1, S2, D"
+      "fun_no": "F470",
+      "symbolic_mnemonic": "FTPcSV",
+      "operands_syntax": "S1, S2, S3",
+      "name": "FTP client connected server setting",
+      "steps": "8-776",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-8\"",
+      "full_syntax": "F470 (FTPcSV) S1, S2, S3"
+    },
+    {
+      "fun_no": "F471",
+      "symbolic_mnemonic": "FTPcSET",
+      "operands_syntax": "S1, S2, S3, S4",
+      "name": "FTP client transfer setting",
+      "steps": "10-1034",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-14\"",
+      "full_syntax": "F471 (FTPcSET) S1, S2, S3, S4"
+    },
+    {
+      "fun_no": "F472",
+      "symbolic_mnemonic": "FTPcLOG",
+      "operands_syntax": "S1, S2, S3",
+      "name": "Logging/Trace transfer settings",
+      "steps": "8-776",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-22\"",
+      "full_syntax": "F472 (FTPcLOG) S1, S2, S3"
+    },
+    {
+      "fun_no": "F473",
+      "symbolic_mnemonic": "FTPcREQ",
+      "operands_syntax": "S",
+      "name": "FTP client transfer request",
+      "steps": "4",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-25\"",
+      "full_syntax": "F473 (FTPcREQ) S"
+    },
+    {
+      "fun_no": "F474",
+      "symbolic_mnemonic": "FTPcCTL",
+      "operands_syntax": "S1, S2",
+      "name": "FTP client transfer control",
+      "steps": "6-518",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-29\"",
+      "full_syntax": "F474 (FTPcCTL) S1, S2"
     },
     {
       "fun_no": "F490",
@@ -4017,66 +4087,6 @@
       "category": "EtherNet/IP instructions (C32ET only)",
       "manual_ref": "\"P. 35-28\"",
       "full_syntax": "F499 (CIPMGET) S1, S2, D1, D2"
-    },
-    {
-      "fun_no": "F465",
-      "symbolic_mnemonic": "ETSTAT",
-      "operands_syntax": "S1, S2, D",
-      "name": "EtherNet/IP information acquisition: FTP",
-      "steps": "8-520",
-      "category": "FTP instruction (C32ET only)",
-      "manual_ref": "\"P. 36-2\"",
-      "full_syntax": "F465 (ETSTAT) S1, S2, D"
-    },
-    {
-      "fun_no": "F470",
-      "symbolic_mnemonic": "FTPcSV",
-      "operands_syntax": "S1, S2, S3",
-      "name": "FTP client connected server setting",
-      "steps": "8-776",
-      "category": "FTP instruction (C32ET only)",
-      "manual_ref": "\"P. 36-8\"",
-      "full_syntax": "F470 (FTPcSV) S1, S2, S3"
-    },
-    {
-      "fun_no": "F471",
-      "symbolic_mnemonic": "FTPcSET",
-      "operands_syntax": "S1, S2, S3, S4",
-      "name": "FTP client transfer setting",
-      "steps": "10-1034",
-      "category": "FTP instruction (C32ET only)",
-      "manual_ref": "\"P. 36-14\"",
-      "full_syntax": "F471 (FTPcSET) S1, S2, S3, S4"
-    },
-    {
-      "fun_no": "F472",
-      "symbolic_mnemonic": "FTPcLOG",
-      "operands_syntax": "S1, S2, S3",
-      "name": "Logging/Trace transfer settings",
-      "steps": "8-776",
-      "category": "FTP instruction (C32ET only)",
-      "manual_ref": "\"P. 36-22\"",
-      "full_syntax": "F472 (FTPcLOG) S1, S2, S3"
-    },
-    {
-      "fun_no": "F473",
-      "symbolic_mnemonic": "FTPcREQ",
-      "operands_syntax": "S",
-      "name": "FTP client transfer request",
-      "steps": "4",
-      "category": "FTP instruction (C32ET only)",
-      "manual_ref": "\"P. 36-25\"",
-      "full_syntax": "F473 (FTPcREQ) S"
-    },
-    {
-      "fun_no": "F474",
-      "symbolic_mnemonic": "FTPcCTL",
-      "operands_syntax": "S1, S2",
-      "name": "FTP client transfer control",
-      "steps": "6-518",
-      "category": "FTP instruction (C32ET only)",
-      "manual_ref": "\"P. 36-29\"",
-      "full_syntax": "F474 (FTPcCTL) S1, S2"
     }
   ]
 }
