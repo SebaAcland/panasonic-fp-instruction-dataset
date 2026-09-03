@@ -1,0 +1,4082 @@
+{
+  "metadata": {
+    "title": "Panasonic FP0 / FP0H / FP Series Instruction & Step Code Knowledge Base",
+    "source": "Panasonic FP0H CPU Programming Manual (WUMJ-FP0HPGR-091) & FP-Series Manual",
+    "target": "LLM / AI Model fine-tuning & prompt enrichment for decompilation & subroutine analysis",
+    "total_basic_instructions": 125,
+    "total_high_level_instructions": 300
+  },
+  "memory_map": {
+    "X": {
+      "type": "Bit/Word (WX)",
+      "desc": "Entrada digital física (External Input)"
+    },
+    "Y": {
+      "type": "Bit/Word (WY)",
+      "desc": "Salida digital física (External Output)"
+    },
+    "R": {
+      "type": "Bit/Word (WR)",
+      "desc": "Relé interno / Bandera de memoria (Internal Relay)"
+    },
+    "SR": {
+      "type": "Bit/Word (WSR)",
+      "desc": "Relé especial del sistema (Special Internal Relay, ej: R9010 Always ON)"
+    },
+    "T": {
+      "type": "Bit/Word (TS/TP)",
+      "desc": "Temporizador (Timer contact / Set value / Present value)"
+    },
+    "C": {
+      "type": "Bit/Word (CS/CP)",
+      "desc": "Contador (Counter contact / Set value / Present value)"
+    },
+    "DT": {
+      "type": "Word (16-bit) / DWord (DDT 32-bit)",
+      "desc": "Registro de datos generales (Data Register)"
+    },
+    "LD": {
+      "type": "Word",
+      "desc": "Registro de enlace local (Link Data Register)"
+    },
+    "FL": {
+      "type": "Word",
+      "desc": "Registro de memoria flash / archivos (File Register)"
+    },
+    "K": {
+      "type": "Decimal Constant",
+      "desc": "Constante numérica decimal entera (ej: K100, K-5)"
+    },
+    "H": {
+      "type": "Hexadecimal Constant",
+      "desc": "Constante hexadecimal (ej: H1F, HFFFF)"
+    },
+    "P": {
+      "type": "Pointer / Label",
+      "desc": "Puntero para subrutinas o saltos (ej: CALL P0, P0:)"
+    }
+  },
+  "system_special_relays": {
+    "R9010": "Siempre en ON (Normally ON relay)",
+    "R9011": "Siempre en OFF (Normally OFF relay)",
+    "R9013": "Primer ciclo de scan en ON (Initial scan pulse)",
+    "R9014": "Error flag (Se activa si hay error de ejecución de instrucción)",
+    "R9018": "Pulso de reloj de 1 segundo (1s clock pulse)",
+    "R901A": "Resultado de comparación mayor que (>)",
+    "R901B": "Resultado de comparación igual (=)",
+    "R901C": "Resultado de comparación menor que (<)",
+    "R901D": "Bandera de acarreo / Carry Flag (CY)"
+  },
+  "subroutine_and_flow_mechanics": {
+    "CALL": "Llama a la subrutina Px. Al ejecutar, salta a la etiqueta Px y apila el contador de programa.",
+    "RET": "Retorno de subrutina. Desapila y retorna a la instrucción siguiente al CALL.",
+    "MC": "Master Control. Habilita o deshabilita la ejecución condicional de un bloque de programa.",
+    "MCE": "Master Control End. Cierra el bloque Master Control.",
+    "JP": "Salto incondicional o condicional a una etiqueta Px.",
+    "LOOP": "Bucle con contador (usado con F168 o instrucciones de control)."
+  },
+  "basic_instructions": [
+    {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DOT",
+      "type": "basic",
+      "description": "Outputs the operation result: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-7\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "/",
+      "type": "basic",
+      "description": "Inverts the operation result",
+      "steps": "1",
+      "manual_ref": "\"P.2-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DAN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-13\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DAN/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact serially: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-13\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact in parallel",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DOR",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact in parallel: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact in parallel",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DOR/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact in parallel: Direct input",
+      "steps": "2",
+      "manual_ref": "\"P.2-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST↑",
+      "type": "basic",
+      "description": "Begins a rise contact logic operation",
+      "steps": "2",
+      "manual_ref": "\"P.2-21\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST↓",
+      "type": "basic",
+      "description": "Begins fall contact logic operation",
+      "steps": "2",
+      "manual_ref": "\"P.2-21\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN↑",
+      "type": "basic",
+      "description": "Connects a contact serially when a rise is detected",
+      "steps": "2",
+      "manual_ref": "\"P.2-21\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN↓",
+      "type": "basic",
+      "description": "Connects a contact serially when a fall is detected",
+      "steps": "2",
+      "manual_ref": "\"P.2-21\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR↑",
+      "type": "basic",
+      "description": "Connects a contact in parallel when a rise is detected",
+      "steps": "2",
+      "manual_ref": "\"P.2-21\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR↓",
+      "type": "basic",
+      "description": "Connects a contact in parallel when a fall is detected",
+      "steps": "2",
+      "manual_ref": "\"P.2-21\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ALT",
+      "type": "basic",
+      "description": "Alternate out",
+      "steps": "3",
+      "manual_ref": "\"P.2-23\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANS",
+      "type": "basic",
+      "description": "Connects multiple instruction blocks serially",
+      "steps": "1",
+      "manual_ref": "\"P.2-25\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORS",
+      "type": "basic",
+      "description": "Connects multiple instruction blocks in parallel",
+      "steps": "1",
+      "manual_ref": "\"P.2-27\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "PSHS",
+      "type": "basic",
+      "description": "Stores the operation result",
+      "steps": "1",
+      "manual_ref": "\"P.2-29\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "RDS",
+      "type": "basic",
+      "description": "Reads the operation result stored by PSHS",
+      "steps": "1",
+      "manual_ref": "\"P.2-29\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "POPS",
+      "type": "basic",
+      "description": "Reads and clears the operation result stored by PSHS",
+      "steps": "1",
+      "manual_ref": "\"P.2-29\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DF",
+      "type": "basic",
+      "description": "Rise detection",
+      "steps": "1",
+      "manual_ref": "\"P.2-33\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DF/",
+      "type": "basic",
+      "description": "Fall detection",
+      "steps": "1",
+      "manual_ref": "\"P.2-33\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DFI",
+      "type": "basic",
+      "description": "Rise detection (possible on the first scan)",
+      "steps": "1",
+      "manual_ref": "\"P.2-38\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DSET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON: Direct input",
+      "steps": "3",
+      "manual_ref": "\"P.2-43\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "RST",
+      "type": "basic",
+      "description": "Turns OFF the output and holds it OFF",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DRST",
+      "type": "basic",
+      "description": "Turns OFF the output and holds it OFF: Direct input",
+      "steps": "3",
+      "manual_ref": "\"P.2-43\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "KP",
+      "type": "basic",
+      "description": "Outputs with set and reset inputs",
+      "steps": "1",
+      "manual_ref": "\"P.2-47\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "DKP",
+      "type": "basic",
+      "description": "Outputs with set and reset inputs: Direct output",
+      "steps": "2",
+      "manual_ref": "\"P.2-49\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "NOP",
+      "type": "basic",
+      "description": "No operation",
+      "steps": "1",
+      "manual_ref": "\"P.2-52\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "TML",
+      "type": "basic",
+      "description": "On-delay timer set in 0.001‑s units",
+      "steps": "3 (4)",
+      "manual_ref": "\"P.3-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "TMR",
+      "type": "basic",
+      "description": "On-delay timer set in 0.01‑s units",
+      "steps": "3 (4)",
+      "manual_ref": "\"P.3-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "TMX",
+      "type": "basic",
+      "description": "On-delay timer set in 0.1‑s units",
+      "steps": "3 (4)",
+      "manual_ref": "\"P.3-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "TMY",
+      "type": "basic",
+      "description": "On-delay timer set in 1‑s units",
+      "steps": "4 (5)",
+      "manual_ref": "\"P.3-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "F137 STMR",
+      "type": "basic",
+      "description": "On-delay timer set to 0.01 s",
+      "steps": "5",
+      "manual_ref": "\"P.3-9\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "F183 DSTM",
+      "type": "basic",
+      "description": "32-bit on-delay timer set to 0.01 s",
+      "steps": "7",
+      "manual_ref": "\"P.3-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "CT",
+      "type": "basic",
+      "description": "Down counter",
+      "steps": "3 (4)",
+      "manual_ref": "\"P.3-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "F118 UDC",
+      "type": "basic",
+      "description": "Up/down counter",
+      "steps": "5",
+      "manual_ref": "\"P.3-23\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SR",
+      "type": "basic",
+      "description": "Shift register",
+      "steps": "1",
+      "manual_ref": "\"P.3-26\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "F119 LRSR",
+      "type": "basic",
+      "description": "Left/right shift register",
+      "steps": "5",
+      "manual_ref": "\"P.3-29\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "F182 FILTR",
+      "type": "basic",
+      "description": "Time constant processing instruction S1, S2, S3, D",
+      "steps": "9",
+      "manual_ref": "\"P.3-32\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "MC",
+      "type": "basic",
+      "description": "Master control relay",
+      "steps": "2",
+      "manual_ref": "\"P.4-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "MCE",
+      "type": "basic",
+      "description": "Master control relay end",
+      "steps": "2",
+      "manual_ref": "\"P.4-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "JP",
+      "type": "basic",
+      "description": "Jumps to specified label",
+      "steps": "2",
+      "manual_ref": "\"P.4-7\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "LOOP",
+      "type": "basic",
+      "description": "Jumps to the specified label the number of times specified by D",
+      "steps": "4",
+      "manual_ref": "\"P.4-11\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "LBL",
+      "type": "basic",
+      "description": "Labels subject to the processing of instructions such as JP and LOOP",
+      "steps": "1",
+      "manual_ref": "\"P.4-7\" \"P.4-11\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ED",
+      "type": "basic",
+      "description": "Main program area end",
+      "steps": "1",
+      "manual_ref": "\"P.4-15\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "CNDE",
+      "type": "basic",
+      "description": "Conditional program end",
+      "steps": "1",
+      "manual_ref": "\"P.4-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "EJECT",
+      "type": "basic",
+      "description": "Page break when printing",
+      "steps": "2",
+      "manual_ref": "\"P.4-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SSTP",
+      "type": "basic",
+      "description": "Process start",
+      "steps": "3",
+      "manual_ref": "\"P.5-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "NSTL",
+      "type": "basic",
+      "description": "Specified process start-up (every scan execution type)",
+      "steps": "3",
+      "manual_ref": "\"P.5-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "NSTP",
+      "type": "basic",
+      "description": "Specified process start-up (differential execution type)",
+      "steps": "3",
+      "manual_ref": "\"P.5-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "CSTP",
+      "type": "basic",
+      "description": "Clears the specified process",
+      "steps": "3",
+      "manual_ref": "\"P.5-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STPE",
+      "type": "basic",
+      "description": "Step ladder area end",
+      "steps": "1",
+      "manual_ref": "\"P.5-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SCLR",
+      "type": "basic",
+      "description": "Clears multiple processes",
+      "steps": "5",
+      "manual_ref": "\"P.5-17\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "CALL",
+      "type": "basic",
+      "description": "Calls the specified subroutine",
+      "steps": "2",
+      "manual_ref": "\"P.6-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SUB",
+      "type": "basic",
+      "description": "Subroutine definition",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.6-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "RET",
+      "type": "basic",
+      "description": "Ends the subroutine program and returns to the main program",
+      "steps": "1",
+      "manual_ref": "\"P.6-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "INT",
+      "type": "basic",
+      "description": "Interrupt program definition",
+      "steps": "1",
+      "manual_ref": "\"P.7-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "IRET",
+      "type": "basic",
+      "description": "Ends the interrupt program and returns to the main program",
+      "steps": "1",
+      "manual_ref": "\"P.7-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ICTL",
+      "type": "basic",
+      "description": "Interrupt control specification",
+      "steps": "5",
+      "manual_ref": "\"P.7-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "EDPB(Note 1)",
+      "type": "basic",
+      "description": "Final point of PBn program",
+      "steps": "1",
+      "manual_ref": "",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SYS1",
+      "type": "basic",
+      "description": "Communication conditions setting, end code time setting for setting communication conditions, password setting, interrupt setting, PLC link setting, MEWTOCOL-COM response control, high-speed counter operation mode change, direct station number setting, indirect station number setting, firmware version number read",
+      "steps": "13",
+      "manual_ref": "\"P.8-2\" \"P.8-8\" \"P.8-10\" \"P.8-12\" \"P.8-14\" \"P.8-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "SYS2",
+      "type": "basic",
+      "description": "System register change instruction",
+      "steps": "7",
+      "manual_ref": "\"P.8-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 16-bit data",
+      "steps": "5",
+      "manual_ref": "\"P.9-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST<>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 16-bit data",
+      "steps": "5",
+      "manual_ref": "\"P.9-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 16-bit data",
+      "steps": "5",
+      "manual_ref": "\"P.9-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST>=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 16-bit data",
+      "steps": "5",
+      "manual_ref": "\"P.9-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST<",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 16-bit data",
+      "steps": "5",
+      "manual_ref": "\"P.9-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ST<=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 16-bit data",
+      "steps": "5",
+      "manual_ref": "\"P.9-2\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN =",
+      "type": "basic",
+      "description": "16-bit data compare serial connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN <>",
+      "type": "basic",
+      "description": "16-bit data compare serial connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN >",
+      "type": "basic",
+      "description": "16-bit data compare serial connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN >=",
+      "type": "basic",
+      "description": "16-bit data compare serial connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN <",
+      "type": "basic",
+      "description": "16-bit data compare serial connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AN <=",
+      "type": "basic",
+      "description": "16-bit data compare serial connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-4\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR=",
+      "type": "basic",
+      "description": "16-bit data compare parallel connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-6\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR<>",
+      "type": "basic",
+      "description": "16-bit data compare parallel connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-6\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR>",
+      "type": "basic",
+      "description": "16-bit data compare parallel connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-6\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR>=",
+      "type": "basic",
+      "description": "16-bit data compare parallel connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-6\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR<",
+      "type": "basic",
+      "description": "16-bit data compare parallel connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-6\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "OR<=",
+      "type": "basic",
+      "description": "16-bit data compare parallel connection",
+      "steps": "5",
+      "manual_ref": "\"P.9-6\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STD=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STD<>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STD>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STD>=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STD<",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STD<=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AND=",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AND<>",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AND>",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AND>=",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AND<",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "AND<=",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORD=",
+      "type": "basic",
+      "description": "32-bit data compare parallel connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORD<>",
+      "type": "basic",
+      "description": "32-bit data compare parallel connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORD>",
+      "type": "basic",
+      "description": "32-bit data compare parallel connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORD>=",
+      "type": "basic",
+      "description": "32-bit data compare parallel connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORD<",
+      "type": "basic",
+      "description": "32-bit data compare parallel connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORD<=",
+      "type": "basic",
+      "description": "32-bit data compare parallel connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-12\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STF=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare single-precision floating point data",
+      "steps": "10",
+      "manual_ref": "\"P.9-14\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STF<>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare single-precision floating point data",
+      "steps": "10",
+      "manual_ref": "\"P.9-14\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STF>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare single-precision floating point data",
+      "steps": "10",
+      "manual_ref": "\"P.9-14\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STF>=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare single-precision floating point data",
+      "steps": "10",
+      "manual_ref": "\"P.9-14\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STF<",
+      "type": "basic",
+      "description": "Begins a logical operation to compare single-precision floating point data",
+      "steps": "10",
+      "manual_ref": "\"P.9-14\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "STF<=",
+      "type": "basic",
+      "description": "Begins a logical operation to compare single-precision floating point data",
+      "steps": "10",
+      "manual_ref": "\"P.9-14\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANF=",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANF<>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANF>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANF>=",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANF<",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ANF<=",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORF=",
+      "type": "basic",
+      "description": "Single-precision floating point data compare parallel connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORF<>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare parallel connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORF>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare parallel connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORF>=",
+      "type": "basic",
+      "description": "Single-precision floating point data compare parallel connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORF<",
+      "type": "basic",
+      "description": "Single-precision floating point data compare parallel connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-18\"",
+      "category": "Basic Instruction"
+    },
+    {
+      "mnemonic": "ORF<=",
+      "type": "basic",
+      "description": "Single-precision floating point data compare parallel connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-18\"",
+      "category": "Basic Instruction"
+    }
+  ],
+  "high_level_instructions": [
+    {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, D",
+      "name": "16-bit data transfer",
+      "steps": "5",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-2\"",
+      "full_syntax": "F0 (MV) S, D"
+    },
+    {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "DT90020, D",
+      "name": "10 µs ring counter read",
+      "steps": "5",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-4\"",
+      "full_syntax": "F0 (MV) DT90020, D"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "S, D",
+      "name": "32-bit data transfer",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-5\"",
+      "full_syntax": "F1 (DMV) S, D"
+    },
+    {
+      "fun_no": "F2",
+      "symbolic_mnemonic": "MV/",
+      "operands_syntax": "S, D",
+      "name": "16-bit data invert and transfer",
+      "steps": "5",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-7\"",
+      "full_syntax": "F2 (MV/) S, D"
+    },
+    {
+      "fun_no": "F3",
+      "symbolic_mnemonic": "DMV/",
+      "operands_syntax": "S, D",
+      "name": "32-bit data invert and transfer",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-9\"",
+      "full_syntax": "F3 (DMV/) S, D"
+    },
+    {
+      "fun_no": "F5",
+      "symbolic_mnemonic": "BTM",
+      "operands_syntax": "S, n, D",
+      "name": "Bit data transfer",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-11\"",
+      "full_syntax": "F5 (BTM) S, n, D"
+    },
+    {
+      "fun_no": "F6",
+      "symbolic_mnemonic": "DGT",
+      "operands_syntax": "S, n, D",
+      "name": "Digit data transfer",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-16\"",
+      "full_syntax": "F6 (DGT) S, n, D"
+    },
+    {
+      "fun_no": "F7",
+      "symbolic_mnemonic": "MV2",
+      "operands_syntax": "S1, S2, D",
+      "name": "Two 16-bit data transfer to single area",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-20\"",
+      "full_syntax": "F7 (MV2) S1, S2, D"
+    },
+    {
+      "fun_no": "F8",
+      "symbolic_mnemonic": "DMV2",
+      "operands_syntax": "S1, S2, D",
+      "name": "Two 32-bit data transfer to single area",
+      "steps": "11",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-22\"",
+      "full_syntax": "F8 (DMV2) S1, S2, D"
+    },
+    {
+      "fun_no": "F10",
+      "symbolic_mnemonic": "BKMV",
+      "operands_syntax": "S1, S2, D",
+      "name": "Data block transfer",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-24\"",
+      "full_syntax": "F10 (BKMV) S1, S2, D"
+    },
+    {
+      "fun_no": "F11",
+      "symbolic_mnemonic": "COPY",
+      "operands_syntax": "S, D1, D2",
+      "name": "16-bit data block copy",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-27\"",
+      "full_syntax": "F11 (COPY) S, D1, D2"
+    },
+    {
+      "fun_no": "F12",
+      "symbolic_mnemonic": "ICRD",
+      "operands_syntax": "S1, S2, D",
+      "name": "F-ROM read",
+      "steps": "11",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-29\"",
+      "full_syntax": "F12 (ICRD) S1, S2, D"
+    },
+    {
+      "fun_no": "P13",
+      "symbolic_mnemonic": "PICWT",
+      "operands_syntax": "S1, S2, D",
+      "name": "Write to F-ROM",
+      "steps": "11",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-31\"",
+      "full_syntax": "P13 (PICWT) S1, S2, D"
+    },
+    {
+      "fun_no": "F15",
+      "symbolic_mnemonic": "XCH",
+      "operands_syntax": "D1, D2",
+      "name": "16-Bit data exchange",
+      "steps": "5",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-33\"",
+      "full_syntax": "F15 (XCH) D1, D2"
+    },
+    {
+      "fun_no": "F16",
+      "symbolic_mnemonic": "DXCH",
+      "operands_syntax": "D1, D2",
+      "name": "32-bit data exchange",
+      "steps": "5",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-35\"",
+      "full_syntax": "F16 (DXCH) D1, D2"
+    },
+    {
+      "fun_no": "F17",
+      "symbolic_mnemonic": "SWAP",
+      "operands_syntax": "D",
+      "name": "High byte and low byte exchange",
+      "steps": "3",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-37\"",
+      "full_syntax": "F17 (SWAP) D"
+    },
+    {
+      "fun_no": "F18",
+      "symbolic_mnemonic": "BXCH",
+      "operands_syntax": "D1, D2, D3",
+      "name": "Data block exchange",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-39\"",
+      "full_syntax": "F18 (BXCH) D1, D2, D3"
+    },
+    {
+      "fun_no": "F190",
+      "symbolic_mnemonic": "MV3",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Three 16-bit data transfer to single area",
+      "steps": "10",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-41\"",
+      "full_syntax": "F190 (MV3) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F191",
+      "symbolic_mnemonic": "DMV3",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Three 32-bit data transfer to single area",
+      "steps": "16",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-43\"",
+      "full_syntax": "F191 (DMV3) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F20",
+      "symbolic_mnemonic": "+",
+      "operands_syntax": "S, D",
+      "name": "16-bit data addition [D+S=D]",
+      "steps": "5",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-2\"",
+      "full_syntax": "F20 (+) S, D"
+    },
+    {
+      "fun_no": "F21",
+      "symbolic_mnemonic": "D+",
+      "operands_syntax": "S, D",
+      "name": "32-bit data addition [D+S=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-4\"",
+      "full_syntax": "F21 (D+) S, D"
+    },
+    {
+      "fun_no": "F22",
+      "symbolic_mnemonic": "+",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data addition [S1+S2=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-6\"",
+      "full_syntax": "F22 (+) S1, S2, D"
+    },
+    {
+      "fun_no": "F23",
+      "symbolic_mnemonic": "D+",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data addition [S1+S2=D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-8\"",
+      "full_syntax": "F23 (D+) S1, S2, D"
+    },
+    {
+      "fun_no": "F25",
+      "symbolic_mnemonic": "-",
+      "operands_syntax": "S, D",
+      "name": "16-bit data subtraction [D-S=D]",
+      "steps": "5",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-10\"",
+      "full_syntax": "F25 (-) S, D"
+    },
+    {
+      "fun_no": "F26",
+      "symbolic_mnemonic": "D-",
+      "operands_syntax": "S, D",
+      "name": "32-bit data subtraction [D-S=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-13\"",
+      "full_syntax": "F26 (D-) S, D"
+    },
+    {
+      "fun_no": "F27",
+      "symbolic_mnemonic": "-",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data subtraction [S1-S2=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-15\"",
+      "full_syntax": "F27 (-) S1, S2, D"
+    },
+    {
+      "fun_no": "F28",
+      "symbolic_mnemonic": "D-",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data subtraction [S1-S2=D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-18\"",
+      "full_syntax": "F28 (D-) S1, S2, D"
+    },
+    {
+      "fun_no": "F30",
+      "symbolic_mnemonic": "*",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data multiplication [S1*S2=D+1, D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-20\"",
+      "full_syntax": "F30 (*) S1, S2, D"
+    },
+    {
+      "fun_no": "F31",
+      "symbolic_mnemonic": "D*",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1*S2=D+3,D+2,D +1,D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-22\"",
+      "full_syntax": "F31 (D*) S1, S2, D"
+    },
+    {
+      "fun_no": "F32",
+      "symbolic_mnemonic": "%",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data division [S1/S2=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-24\"",
+      "full_syntax": "F32 (%) S1, S2, D"
+    },
+    {
+      "fun_no": "F33",
+      "symbolic_mnemonic": "D%",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data division [S1/S2=D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-26\"",
+      "full_syntax": "F33 (D%) S1, S2, D"
+    },
+    {
+      "fun_no": "F34",
+      "symbolic_mnemonic": "*W",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data multiplication [S1*S2=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-28\"",
+      "full_syntax": "F34 (*W) S1, S2, D"
+    },
+    {
+      "fun_no": "F35",
+      "symbolic_mnemonic": "+1",
+      "operands_syntax": "D",
+      "name": "16-bit data increment",
+      "steps": "3",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-30\"",
+      "full_syntax": "F35 (+1) D"
+    },
+    {
+      "fun_no": "F36",
+      "symbolic_mnemonic": "D+1",
+      "operands_syntax": "D",
+      "name": "32-bit data increment",
+      "steps": "3",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-32\"",
+      "full_syntax": "F36 (D+1) D"
+    },
+    {
+      "fun_no": "F37",
+      "symbolic_mnemonic": "-1",
+      "operands_syntax": "D",
+      "name": "16-bit data decrement",
+      "steps": "3",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-34\"",
+      "full_syntax": "F37 (-1) D"
+    },
+    {
+      "fun_no": "F38",
+      "symbolic_mnemonic": "D-1",
+      "operands_syntax": "D",
+      "name": "32-bit data decrement",
+      "steps": "3",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-36\"",
+      "full_syntax": "F38 (D-1) D"
+    },
+    {
+      "fun_no": "F39",
+      "symbolic_mnemonic": "D*D",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1 × S2 = D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-38\"",
+      "full_syntax": "F39 (D*D) S1, S2, D"
+    },
+    {
+      "fun_no": "F40",
+      "symbolic_mnemonic": "B+",
+      "operands_syntax": "S, D",
+      "name": "4-digit BCD data addition [D+S=D]",
+      "steps": "5",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 12-2\"",
+      "full_syntax": "F40 (B+) S, D"
+    },
+    {
+      "fun_no": "F41",
+      "symbolic_mnemonic": "DB+",
+      "operands_syntax": "S, D",
+      "name": "8-digit BCD data addition [D+S=D]",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-4\"",
+      "full_syntax": "F41 (DB+) S, D"
+    },
+    {
+      "fun_no": "F42",
+      "symbolic_mnemonic": "B+",
+      "operands_syntax": "S1, S2, D",
+      "name": "4-digit BCD data addition [S1+S2=D]",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-6\"",
+      "full_syntax": "F42 (B+) S1, S2, D"
+    },
+    {
+      "fun_no": "F43",
+      "symbolic_mnemonic": "DB+",
+      "operands_syntax": "S1, S2, D",
+      "name": "8-digit BCD data addition [S1+S2=D]",
+      "steps": "11",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-8\"",
+      "full_syntax": "F43 (DB+) S1, S2, D"
+    },
+    {
+      "fun_no": "F45",
+      "symbolic_mnemonic": "B-",
+      "operands_syntax": "S, D",
+      "name": "4-digit BCD data subtraction [D-S=D]",
+      "steps": "5",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-10\"",
+      "full_syntax": "F45 (B-) S, D"
+    },
+    {
+      "fun_no": "F46",
+      "symbolic_mnemonic": "DB-",
+      "operands_syntax": "S, D",
+      "name": "8-digit BCD data subtraction [D-S=D]",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-12\"",
+      "full_syntax": "F46 (DB-) S, D"
+    },
+    {
+      "fun_no": "F47",
+      "symbolic_mnemonic": "B-",
+      "operands_syntax": "S1, S2, D",
+      "name": "4-digit BCD data subtraction [S1-S2=D]",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-14\"",
+      "full_syntax": "F47 (B-) S1, S2, D"
+    },
+    {
+      "fun_no": "F48",
+      "symbolic_mnemonic": "DB-",
+      "operands_syntax": "S1, S2, D",
+      "name": "8-digit BCD data subtraction [S1-S2=D]",
+      "steps": "11",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-16\"",
+      "full_syntax": "F48 (DB-) S1, S2, D"
+    },
+    {
+      "fun_no": "F50",
+      "symbolic_mnemonic": "B*",
+      "operands_syntax": "S1, S2, D",
+      "name": "4-digit BCD data multiplication [S1*S2=D+1, D]",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-18\"",
+      "full_syntax": "F50 (B*) S1, S2, D"
+    },
+    {
+      "fun_no": "F51",
+      "symbolic_mnemonic": "DB*",
+      "operands_syntax": "S1, S2, D",
+      "name": "8-Digit BCD data multiplication [S1*S2=D+3,D +2,D+1,D]",
+      "steps": "11",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-20\"",
+      "full_syntax": "F51 (DB*) S1, S2, D"
+    },
+    {
+      "fun_no": "F52",
+      "symbolic_mnemonic": "B%",
+      "operands_syntax": "S1, S2, D",
+      "name": "4-digit BCD data division [S1/S2=D]",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-22\"",
+      "full_syntax": "F52 (B%) S1, S2, D"
+    },
+    {
+      "fun_no": "F53",
+      "symbolic_mnemonic": "DB%",
+      "operands_syntax": "S1, S2, D",
+      "name": "8-digit BCD data division [S1/S2=D+1, D]",
+      "steps": "11",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-24\"",
+      "full_syntax": "F53 (DB%) S1, S2, D"
+    },
+    {
+      "fun_no": "F55",
+      "symbolic_mnemonic": "B+1",
+      "operands_syntax": "D",
+      "name": "4-digit BCD data increment",
+      "steps": "3",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-26\"",
+      "full_syntax": "F55 (B+1) D"
+    },
+    {
+      "fun_no": "F56",
+      "symbolic_mnemonic": "DB+1",
+      "operands_syntax": "D",
+      "name": "8-digit BCD data increment",
+      "steps": "3",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-28\"",
+      "full_syntax": "F56 (DB+1) D"
+    },
+    {
+      "fun_no": "F57",
+      "symbolic_mnemonic": "B-1",
+      "operands_syntax": "D",
+      "name": "4-digit BCD data decrement",
+      "steps": "3",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-30\"",
+      "full_syntax": "F57 (B-1) D"
+    },
+    {
+      "fun_no": "F58",
+      "symbolic_mnemonic": "DB-1",
+      "operands_syntax": "D",
+      "name": "8-digit BCD data decrement",
+      "steps": "3",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 12-32\"",
+      "full_syntax": "F58 (DB-1) D"
+    },
+    {
+      "fun_no": "F60",
+      "symbolic_mnemonic": "CMP",
+      "operands_syntax": "S1, S2",
+      "name": "16-bit data comparison",
+      "steps": "5",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 13-2\"",
+      "full_syntax": "F60 (CMP) S1, S2"
+    },
+    {
+      "fun_no": "F61",
+      "symbolic_mnemonic": "DCMP",
+      "operands_syntax": "S1, S2",
+      "name": "32-bit data comparison",
+      "steps": "9",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 13-8\"",
+      "full_syntax": "F61 (DCMP) S1, S2"
+    },
+    {
+      "fun_no": "F62",
+      "symbolic_mnemonic": "WIN",
+      "operands_syntax": "S1, S2, S3",
+      "name": "16-bit data band comparison",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 13-12\"",
+      "full_syntax": "F62 (WIN) S1, S2, S3"
+    },
+    {
+      "fun_no": "F63",
+      "symbolic_mnemonic": "DWIN",
+      "operands_syntax": "S1, S2, S3",
+      "name": "32-bit data band comparison",
+      "steps": "13",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 13-14\"",
+      "full_syntax": "F63 (DWIN) S1, S2, S3"
+    },
+    {
+      "fun_no": "F64",
+      "symbolic_mnemonic": "BCMP",
+      "operands_syntax": "S1, S2, S3",
+      "name": "Block data comparison",
+      "steps": "7",
+      "category": "Data comparison instructions",
+      "manual_ref": "\"P. 13-16\"",
+      "full_syntax": "F64 (BCMP) S1, S2, S3"
+    },
+    {
+      "fun_no": "F373",
+      "symbolic_mnemonic": "DTR",
+      "operands_syntax": "S, D",
+      "name": "16-bit data revision detection",
+      "steps": "6",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 13-19\"",
+      "full_syntax": "F373 (DTR) S, D"
+    },
+    {
+      "fun_no": "F374",
+      "symbolic_mnemonic": "DDTR",
+      "operands_syntax": "S, D",
+      "name": "32-bit data revision detection",
+      "steps": "6",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 13-21\"",
+      "full_syntax": "F374 (DDTR) S, D"
+    },
+    {
+      "fun_no": "F65",
+      "symbolic_mnemonic": "WAN",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data AND",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-2\"",
+      "full_syntax": "F65 (WAN) S1, S2, D"
+    },
+    {
+      "fun_no": "F66",
+      "symbolic_mnemonic": "WOR",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data OR",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-4\"",
+      "full_syntax": "F66 (WOR) S1, S2, D"
+    },
+    {
+      "fun_no": "F67",
+      "symbolic_mnemonic": "XOR",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data exclusive OR",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-6\"",
+      "full_syntax": "F67 (XOR) S1, S2, D"
+    },
+    {
+      "fun_no": "F68",
+      "symbolic_mnemonic": "XNR",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data exclusive NOR",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-8\"",
+      "full_syntax": "F68 (XNR) S1, S2, D"
+    },
+    {
+      "fun_no": "F69",
+      "symbolic_mnemonic": "WUNI",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "[(S1 AND S3) OR (S2 AND S3) = D] (16-bit)",
+      "steps": "9",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-10\"",
+      "full_syntax": "F69 (WUNI) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F215",
+      "symbolic_mnemonic": "DAND",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data AND",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-12\"",
+      "full_syntax": "F215 (DAND) S1, S2, D"
+    },
+    {
+      "fun_no": "F216",
+      "symbolic_mnemonic": "DOR",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data OR",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-14\"",
+      "full_syntax": "F216 (DOR) S1, S2, D"
+    },
+    {
+      "fun_no": "F217",
+      "symbolic_mnemonic": "DXOR",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data exclusive OR",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-16\"",
+      "full_syntax": "F217 (DXOR) S1, S2, D"
+    },
+    {
+      "fun_no": "F218",
+      "symbolic_mnemonic": "DXNR",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data exclusive NOR",
+      "steps": "12",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-18\"",
+      "full_syntax": "F218 (DXNR) S1, S2, D"
+    },
+    {
+      "fun_no": "F219",
+      "symbolic_mnemonic": "DUNI",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "[(S1 AND S3) OR (S2 AND S3) = D] (32-bit)",
+      "steps": "16",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-20\"",
+      "full_syntax": "F219 (DUNI) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F70",
+      "symbolic_mnemonic": "BCC",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Block check code (ADD.SUB,XOR,CRC)",
+      "steps": "9",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-3\"",
+      "full_syntax": "F70 (BCC) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F71",
+      "symbolic_mnemonic": "HEXA",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert hexadecimal data to ASCII code",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-7\"",
+      "full_syntax": "F71 (HEXA) S1, S2, D"
+    },
+    {
+      "fun_no": "F72",
+      "symbolic_mnemonic": "AHEX",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert ASCII code to hexadecimal data",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-10\"",
+      "full_syntax": "F72 (AHEX) S1, S2, D"
+    },
+    {
+      "fun_no": "F73",
+      "symbolic_mnemonic": "BCDA",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert BCD data to ASCII code",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-14\"",
+      "full_syntax": "F73 (BCDA) S1, S2, D"
+    },
+    {
+      "fun_no": "F74",
+      "symbolic_mnemonic": "ABCD",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert ASCII code to BCD data",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-18\"",
+      "full_syntax": "F74 (ABCD) S1, S2, D"
+    },
+    {
+      "fun_no": "F75",
+      "symbolic_mnemonic": "BINA",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert 16-bit binary data to ASCII code",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-22\"",
+      "full_syntax": "F75 (BINA) S1, S2, D"
+    },
+    {
+      "fun_no": "F76",
+      "symbolic_mnemonic": "ABIN",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert ASCII code to 16-bit binary data",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-25\"",
+      "full_syntax": "F76 (ABIN) S1, S2, D"
+    },
+    {
+      "fun_no": "F77",
+      "symbolic_mnemonic": "DBIA",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert 32-bit binary data to ASCII code",
+      "steps": "11",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-29\"",
+      "full_syntax": "F77 (DBIA) S1, S2, D"
+    },
+    {
+      "fun_no": "F78",
+      "symbolic_mnemonic": "DABI",
+      "operands_syntax": "S1, S2, D",
+      "name": "Convert ASCII code to 32-bit binary data",
+      "steps": "11",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-32\"",
+      "full_syntax": "F78 (DABI) S1, S2, D"
+    },
+    {
+      "fun_no": "F80",
+      "symbolic_mnemonic": "BCD",
+      "operands_syntax": "S, D",
+      "name": "Convert 16-bit binary data to BCD data",
+      "steps": "5",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-36\"",
+      "full_syntax": "F80 (BCD) S, D"
+    },
+    {
+      "fun_no": "F81",
+      "symbolic_mnemonic": "BIN",
+      "operands_syntax": "S, D",
+      "name": "Convert BCD data to 16-bit binary data",
+      "steps": "5",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-38\"",
+      "full_syntax": "F81 (BIN) S, D"
+    },
+    {
+      "fun_no": "F82",
+      "symbolic_mnemonic": "DBCD",
+      "operands_syntax": "S, D",
+      "name": "Convert 32-bit binary data to BCD data",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-40\"",
+      "full_syntax": "F82 (DBCD) S, D"
+    },
+    {
+      "fun_no": "F83",
+      "symbolic_mnemonic": "DBIN",
+      "operands_syntax": "S, D",
+      "name": "Convert BCD data to 32-bit binary data",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-41\"",
+      "full_syntax": "F83 (DBIN) S, D"
+    },
+    {
+      "fun_no": "F84",
+      "symbolic_mnemonic": "INV",
+      "operands_syntax": "D",
+      "name": "16-bit data inversion",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-42\"",
+      "full_syntax": "F84 (INV) D"
+    },
+    {
+      "fun_no": "F85",
+      "symbolic_mnemonic": "NEG",
+      "operands_syntax": "D",
+      "name": "16-bit data sign inversion",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-43\"",
+      "full_syntax": "F85 (NEG) D"
+    },
+    {
+      "fun_no": "F86",
+      "symbolic_mnemonic": "DNEG",
+      "operands_syntax": "D",
+      "name": "32-bit data sign inversion",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-44\"",
+      "full_syntax": "F86 (DNEG) D"
+    },
+    {
+      "fun_no": "F87",
+      "symbolic_mnemonic": "ABS",
+      "operands_syntax": "D",
+      "name": "16-bit data absolute value",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-46\"",
+      "full_syntax": "F87 (ABS) D"
+    },
+    {
+      "fun_no": "F88",
+      "symbolic_mnemonic": "DABS",
+      "operands_syntax": "D",
+      "name": "32-bit data absolute value",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-47\"",
+      "full_syntax": "F88 (DABS) D"
+    },
+    {
+      "fun_no": "F89",
+      "symbolic_mnemonic": "EXT",
+      "operands_syntax": "D",
+      "name": "Sign extension",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-48\"",
+      "full_syntax": "F89 (EXT) D"
+    },
+    {
+      "fun_no": "F90",
+      "symbolic_mnemonic": "DECO",
+      "operands_syntax": "S, n, D",
+      "name": "Decode",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-50\"",
+      "full_syntax": "F90 (DECO) S, n, D"
+    },
+    {
+      "fun_no": "F91",
+      "symbolic_mnemonic": "SEGT",
+      "operands_syntax": "S, D",
+      "name": "7-segment",
+      "steps": "5",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-53\"",
+      "full_syntax": "F91 (SEGT) S, D"
+    },
+    {
+      "fun_no": "F92",
+      "symbolic_mnemonic": "ENCO",
+      "operands_syntax": "S, n, D",
+      "name": "Encode",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-55\"",
+      "full_syntax": "F92 (ENCO) S, n, D"
+    },
+    {
+      "fun_no": "F93",
+      "symbolic_mnemonic": "UNIT",
+      "operands_syntax": "S, n, D",
+      "name": "Digit combine",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-58\"",
+      "full_syntax": "F93 (UNIT) S, n, D"
+    },
+    {
+      "fun_no": "F94",
+      "symbolic_mnemonic": "DIST",
+      "operands_syntax": "S, n, D",
+      "name": "Digit distribute",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-60\"",
+      "full_syntax": "F94 (DIST) S, n, D"
+    },
+    {
+      "fun_no": "F96",
+      "symbolic_mnemonic": "SRC",
+      "operands_syntax": "S1, S2, S3",
+      "name": "16-bit data search",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-62\"",
+      "full_syntax": "F96 (SRC) S1, S2, S3"
+    },
+    {
+      "fun_no": "F97",
+      "symbolic_mnemonic": "DSRC",
+      "operands_syntax": "S1, S2, S3, S4",
+      "name": "32-bit data search",
+      "steps": "9",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-64\"",
+      "full_syntax": "F97 (DSRC) S1, S2, S3, S4"
+    },
+    {
+      "fun_no": "F230",
+      "symbolic_mnemonic": "TMSEC",
+      "operands_syntax": "S, D",
+      "name": "Time to second conversion",
+      "steps": "6",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-66\"",
+      "full_syntax": "F230 (TMSEC) S, D"
+    },
+    {
+      "fun_no": "F231",
+      "symbolic_mnemonic": "SECTM",
+      "operands_syntax": "S, D",
+      "name": "Second to time conversion",
+      "steps": "6",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-69\"",
+      "full_syntax": "F231 (SECTM) S, D"
+    },
+    {
+      "fun_no": "F235",
+      "symbolic_mnemonic": "GRY",
+      "operands_syntax": "S, D",
+      "name": "16-bit data to gray code conversion",
+      "steps": "6",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-72\"",
+      "full_syntax": "F235 (GRY) S, D"
+    },
+    {
+      "fun_no": "F236",
+      "symbolic_mnemonic": "DGRY",
+      "operands_syntax": "S, D",
+      "name": "32-bit data to gray code conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-73\"",
+      "full_syntax": "F236 (DGRY) S, D"
+    },
+    {
+      "fun_no": "F237",
+      "symbolic_mnemonic": "GBIN",
+      "operands_syntax": "S, D",
+      "name": "Gray code to 16-bit data conversion",
+      "steps": "6",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-74\"",
+      "full_syntax": "F237 (GBIN) S, D"
+    },
+    {
+      "fun_no": "F238",
+      "symbolic_mnemonic": "DGBIN",
+      "operands_syntax": "S, D",
+      "name": "Gray code to 32-bit data conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-75\"",
+      "full_syntax": "F238 (DGBIN) S, D"
+    },
+    {
+      "fun_no": "F240",
+      "symbolic_mnemonic": "COLM",
+      "operands_syntax": "S1, S2, D",
+      "name": "Bit line to bit column conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-77\"",
+      "full_syntax": "F240 (COLM) S1, S2, D"
+    },
+    {
+      "fun_no": "F241",
+      "symbolic_mnemonic": "LINE",
+      "operands_syntax": "S1, S2, D",
+      "name": "Bit column to bit line conversion",
+      "steps": "8",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 15-79\"",
+      "full_syntax": "F241 (LINE) S1, S2, D"
+    },
+    {
+      "fun_no": "F100",
+      "symbolic_mnemonic": "SHR",
+      "operands_syntax": "D, n",
+      "name": "16-bit data right shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-2\"",
+      "full_syntax": "F100 (SHR) D, n"
+    },
+    {
+      "fun_no": "F101",
+      "symbolic_mnemonic": "SHL",
+      "operands_syntax": "D, n",
+      "name": "16-bit data left shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-4\"",
+      "full_syntax": "F101 (SHL) D, n"
+    },
+    {
+      "fun_no": "F102",
+      "symbolic_mnemonic": "DSHR",
+      "operands_syntax": "D, n",
+      "name": "32-bit data right shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-6\"",
+      "full_syntax": "F102 (DSHR) D, n"
+    },
+    {
+      "fun_no": "F103",
+      "symbolic_mnemonic": "DSHL",
+      "operands_syntax": "D, n",
+      "name": "32-bit data left shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-8\"",
+      "full_syntax": "F103 (DSHL) D, n"
+    },
+    {
+      "fun_no": "F105",
+      "symbolic_mnemonic": "BSR",
+      "operands_syntax": "D",
+      "name": "16-bit data 1 digit right shift",
+      "steps": "3",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-10\"",
+      "full_syntax": "F105 (BSR) D"
+    },
+    {
+      "fun_no": "F106",
+      "symbolic_mnemonic": "BSL",
+      "operands_syntax": "D",
+      "name": "16-bit data 1 digit left shift",
+      "steps": "3",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-12\"",
+      "full_syntax": "F106 (BSL) D"
+    },
+    {
+      "fun_no": "F108",
+      "symbolic_mnemonic": "BITR",
+      "operands_syntax": "D1, D2, n",
+      "name": "Block area bitwise right shift",
+      "steps": "7",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-14\"",
+      "full_syntax": "F108 (BITR) D1, D2, n"
+    },
+    {
+      "fun_no": "F109",
+      "symbolic_mnemonic": "BITL",
+      "operands_syntax": "D1, D2, n",
+      "name": "Block area bitwise left shift",
+      "steps": "7",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-16\"",
+      "full_syntax": "F109 (BITL) D1, D2, n"
+    },
+    {
+      "fun_no": "F110",
+      "symbolic_mnemonic": "WSHR",
+      "operands_syntax": "D1, D2",
+      "name": "Block area one-word right shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-18\"",
+      "full_syntax": "F110 (WSHR) D1, D2"
+    },
+    {
+      "fun_no": "F111",
+      "symbolic_mnemonic": "WSHL",
+      "operands_syntax": "D1, D2",
+      "name": "Block area one-word left shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-20\"",
+      "full_syntax": "F111 (WSHL) D1, D2"
+    },
+    {
+      "fun_no": "F112",
+      "symbolic_mnemonic": "WBSR",
+      "operands_syntax": "D1, D2",
+      "name": "Block area 1 digit right shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-22\"",
+      "full_syntax": "F112 (WBSR) D1, D2"
+    },
+    {
+      "fun_no": "F113",
+      "symbolic_mnemonic": "WBSL",
+      "operands_syntax": "D1, D2",
+      "name": "Block area 1 digit left shift",
+      "steps": "5",
+      "category": "Data shift instruction",
+      "manual_ref": "\"P. 16-24\"",
+      "full_syntax": "F113 (WBSL) D1, D2"
+    },
+    {
+      "fun_no": "F120",
+      "symbolic_mnemonic": "ROR",
+      "operands_syntax": "D, n",
+      "name": "16-bit data right rotation",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-2\"",
+      "full_syntax": "F120 (ROR) D, n"
+    },
+    {
+      "fun_no": "F121",
+      "symbolic_mnemonic": "ROL",
+      "operands_syntax": "D, n",
+      "name": "16-bit data left rotation",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-4\"",
+      "full_syntax": "F121 (ROL) D, n"
+    },
+    {
+      "fun_no": "F122",
+      "symbolic_mnemonic": "RCR",
+      "operands_syntax": "D, n",
+      "name": "16-bit data right rotation with carry",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-6\"",
+      "full_syntax": "F122 (RCR) D, n"
+    },
+    {
+      "fun_no": "F123",
+      "symbolic_mnemonic": "RCL",
+      "operands_syntax": "D, n",
+      "name": "16-bit data left rotation with carry",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-8\"",
+      "full_syntax": "F123 (RCL) D, n"
+    },
+    {
+      "fun_no": "F125",
+      "symbolic_mnemonic": "DROR",
+      "operands_syntax": "D, n",
+      "name": "32-bit data right rotation",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-10\"",
+      "full_syntax": "F125 (DROR) D, n"
+    },
+    {
+      "fun_no": "F126",
+      "symbolic_mnemonic": "DROL",
+      "operands_syntax": "D, n",
+      "name": "32-bit data left rotation",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-12\"",
+      "full_syntax": "F126 (DROL) D, n"
+    },
+    {
+      "fun_no": "F127",
+      "symbolic_mnemonic": "DRCR",
+      "operands_syntax": "D, n",
+      "name": "32-bit data right rotation with carry",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-14\"",
+      "full_syntax": "F127 (DRCR) D, n"
+    },
+    {
+      "fun_no": "F128",
+      "symbolic_mnemonic": "DRCL",
+      "operands_syntax": "D, n",
+      "name": "32-bit data left rotation with carry",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 17-16\"",
+      "full_syntax": "F128 (DRCL) D, n"
+    },
+    {
+      "fun_no": "F98",
+      "symbolic_mnemonic": "CMPR",
+      "operands_syntax": "D1, D2, D3",
+      "name": "Compress shift read",
+      "steps": "7",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-2\"",
+      "full_syntax": "F98 (CMPR) D1, D2, D3"
+    },
+    {
+      "fun_no": "F99",
+      "symbolic_mnemonic": "CMPW",
+      "operands_syntax": "S1, D, S2",
+      "name": "Compress shift write",
+      "steps": "7",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-6\"",
+      "full_syntax": "F99 (CMPW) S1, D, S2"
+    },
+    {
+      "fun_no": "F115",
+      "symbolic_mnemonic": "FIFT",
+      "operands_syntax": "n, D",
+      "name": "FIFO buffer definition",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-11\"",
+      "full_syntax": "F115 (FIFT) n, D"
+    },
+    {
+      "fun_no": "F116",
+      "symbolic_mnemonic": "FIFR",
+      "operands_syntax": "S, D",
+      "name": "FIFO data read",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-14\"",
+      "full_syntax": "F116 (FIFR) S, D"
+    },
+    {
+      "fun_no": "F117",
+      "symbolic_mnemonic": "FIFW",
+      "operands_syntax": "S, D",
+      "name": "FIFO data write",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 18-18\"",
+      "full_syntax": "F117 (FIFW) S, D"
+    },
+    {
+      "fun_no": "F130",
+      "symbolic_mnemonic": "BTS",
+      "operands_syntax": "D, n",
+      "name": "Specified bit set",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 19-2\"",
+      "full_syntax": "F130 (BTS) D, n"
+    },
+    {
+      "fun_no": "F131",
+      "symbolic_mnemonic": "BTR",
+      "operands_syntax": "D, n",
+      "name": "Specified bit reset",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 19-4\"",
+      "full_syntax": "F131 (BTR) D, n"
+    },
+    {
+      "fun_no": "F132",
+      "symbolic_mnemonic": "BTI",
+      "operands_syntax": "D, n",
+      "name": "Specified bit inversion",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 19-6\"",
+      "full_syntax": "F132 (BTI) D, n"
+    },
+    {
+      "fun_no": "F133",
+      "symbolic_mnemonic": "BTT",
+      "operands_syntax": "S, n",
+      "name": "Specified bit test",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 19-8\"",
+      "full_syntax": "F133 (BTT) S, n"
+    },
+    {
+      "fun_no": "F135",
+      "symbolic_mnemonic": "BCU",
+      "operands_syntax": "S, D",
+      "name": "Count ON bits in 16-bit data",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 19-10\"",
+      "full_syntax": "F135 (BCU) S, D"
+    },
+    {
+      "fun_no": "F136",
+      "symbolic_mnemonic": "DBCU",
+      "operands_syntax": "S, D",
+      "name": "Count ON bits in 32-bit data",
+      "steps": "7",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 19-12\"",
+      "full_syntax": "F136 (DBCU) S, D"
+    },
+    {
+      "fun_no": "F138",
+      "symbolic_mnemonic": "HMSS",
+      "operands_syntax": "S, D",
+      "name": "Hour, minute, second data to second data conversion",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-2\"",
+      "full_syntax": "F138 (HMSS) S, D"
+    },
+    {
+      "fun_no": "F139",
+      "symbolic_mnemonic": "SHMS",
+      "operands_syntax": "S, D",
+      "name": "Second data to hour, minute, second data conversion",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-4\"",
+      "full_syntax": "F139 (SHMS) S, D"
+    },
+    {
+      "fun_no": "F140",
+      "symbolic_mnemonic": "STC",
+      "operands_syntax": "",
+      "name": "Cy flag set",
+      "steps": "1",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-6\"",
+      "full_syntax": "F140 (STC)"
+    },
+    {
+      "fun_no": "F141",
+      "symbolic_mnemonic": "CLC",
+      "operands_syntax": "",
+      "name": "Cy flag clear",
+      "steps": "1",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-7\"",
+      "full_syntax": "F141 (CLC)"
+    },
+    {
+      "fun_no": "F143",
+      "symbolic_mnemonic": "IORF",
+      "operands_syntax": "D1, D2",
+      "name": "Partial I/O refresh",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-8\"",
+      "full_syntax": "F143 (IORF) D1, D2"
+    },
+    {
+      "fun_no": "F147",
+      "symbolic_mnemonic": "PR",
+      "operands_syntax": "S, D",
+      "name": "Print out",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-9\"",
+      "full_syntax": "F147 (PR) S, D"
+    },
+    {
+      "fun_no": "F148",
+      "symbolic_mnemonic": "ERR",
+      "operands_syntax": "n",
+      "name": "Self-diagnostic error code set",
+      "steps": "3",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-14\"",
+      "full_syntax": "F148 (ERR) n"
+    },
+    {
+      "fun_no": "F149",
+      "symbolic_mnemonic": "MSG",
+      "operands_syntax": "S",
+      "name": "Character send to programming tool",
+      "steps": "13",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-16\"",
+      "full_syntax": "F149 (MSG) S"
+    },
+    {
+      "fun_no": "F150",
+      "symbolic_mnemonic": "READ",
+      "operands_syntax": "S1, S2, n, D",
+      "name": "Shared memory read",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-17\"",
+      "full_syntax": "F150 (READ) S1, S2, n, D"
+    },
+    {
+      "fun_no": "F151",
+      "symbolic_mnemonic": "WRT",
+      "operands_syntax": "S1, S2, n, D",
+      "name": "Write to shared memory",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-20\"",
+      "full_syntax": "F151 (WRT) S1, S2, n, D"
+    },
+    {
+      "fun_no": "F157",
+      "symbolic_mnemonic": "CADD",
+      "operands_syntax": "S1, S2, D",
+      "name": "Calendar data addition",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-23\"",
+      "full_syntax": "F157 (CADD) S1, S2, D"
+    },
+    {
+      "fun_no": "F158",
+      "symbolic_mnemonic": "CSUB",
+      "operands_syntax": "S1, S2, D",
+      "name": "Calendar data subtraction",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-26\"",
+      "full_syntax": "F158 (CSUB) S1, S2, D"
+    },
+    {
+      "fun_no": "F160",
+      "symbolic_mnemonic": "DSQR",
+      "operands_syntax": "S, D",
+      "name": "32-bit data square root",
+      "steps": "7",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 20-31\"",
+      "full_syntax": "F160 (DSQR) S, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P.21-4\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P.21-8\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-12\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-17\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-22\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-28\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F159",
+      "symbolic_mnemonic": "MTRN",
+      "operands_syntax": "S, n, D",
+      "name": "General-purpose communication instructions",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.21-36\"",
+      "full_syntax": "F159 (MTRN) S, n, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-4\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MEWTOCOL master]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-7\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-10\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: Function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-12\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-14\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MODBUS master: No function code specification]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-17\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F145",
+      "symbolic_mnemonic": "SEND",
+      "operands_syntax": "S1, S2, D, N",
+      "name": "Data send instruction [MC protocol master].",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-20\"",
+      "full_syntax": "F145 (SEND) S1, S2, D, N"
+    },
+    {
+      "fun_no": "F146",
+      "symbolic_mnemonic": "RECV",
+      "operands_syntax": "S1, S2, N, D",
+      "name": "Data receive instruction [MC protocol master]",
+      "steps": "9",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-23\"",
+      "full_syntax": "F146 (RECV) S1, S2, N, D"
+    },
+    {
+      "fun_no": "F159",
+      "symbolic_mnemonic": "MTRN",
+      "operands_syntax": "S, n, D",
+      "name": "General-purpose communication instructions",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.22-26\"",
+      "full_syntax": "F159 (MTRN) S, n, D"
+    },
+    {
+      "fun_no": "F155",
+      "symbolic_mnemonic": "SMPL",
+      "operands_syntax": "",
+      "name": "Sample set data",
+      "steps": "1",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.23-3\"",
+      "full_syntax": "F155 (SMPL)"
+    },
+    {
+      "fun_no": "F156",
+      "symbolic_mnemonic": "STRG",
+      "operands_syntax": "",
+      "name": "Sampling stop trigger",
+      "steps": "1",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.23-4\"",
+      "full_syntax": "F156 (STRG)"
+    },
+    {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "S, DT90300",
+      "name": "High-speed counter elapsed value read",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) S, DT90300"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90300, D",
+      "name": "High-speed counter elapsed value write",
+      "steps": "7",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90300, D"
+    },
+    {
+      "fun_no": "F166",
+      "symbolic_mnemonic": "HC1S",
+      "operands_syntax": "n, S, D",
+      "name": "Target value match ON (with channel specification)",
+      "steps": "11",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-10\"",
+      "full_syntax": "F166 (HC1S) n, S, D"
+    },
+    {
+      "fun_no": "F167",
+      "symbolic_mnemonic": "HC1R",
+      "operands_syntax": "n, S, D",
+      "name": "Target value match OFF (with channel specification))",
+      "steps": "11",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P.24-10\"",
+      "full_syntax": "F167 (HC1R) n, S, D"
+    },
+    {
+      "fun_no": "F165",
+      "symbolic_mnemonic": "CAM0",
+      "operands_syntax": "S",
+      "name": "Cam control",
+      "steps": "3",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P.24-5\"",
+      "full_syntax": "F165 (CAM0) S"
+    },
+    {
+      "fun_no": "F173",
+      "symbolic_mnemonic": "PWMH",
+      "operands_syntax": "S, n",
+      "name": "PWM output instruction (Frequency specification)",
+      "steps": "5",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P.24-12\"",
+      "full_syntax": "F173 (PWMH) S, n"
+    },
+    {
+      "fun_no": "F173",
+      "symbolic_mnemonic": "PWMH",
+      "operands_syntax": "S, n",
+      "name": "PWM output instruction (Control code specification)",
+      "steps": "5",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P.24-14\"",
+      "full_syntax": "F173 (PWMH) S, n"
+    },
+    {
+      "fun_no": "F95",
+      "symbolic_mnemonic": "ASC",
+      "operands_syntax": "M,D",
+      "name": "Convert character constant to ASCII code",
+      "steps": "15",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-2\"",
+      "full_syntax": "F95 (ASC) M,D"
+    },
+    {
+      "fun_no": "F250",
+      "symbolic_mnemonic": "BTOA",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Convert multiple binary data to ASCII data string",
+      "steps": "12",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-5\"",
+      "full_syntax": "F250 (BTOA) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F251",
+      "symbolic_mnemonic": "ATOB",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Convert multiple ASCII data strings to binary data",
+      "steps": "12",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-11\"",
+      "full_syntax": "F251 (ATOB) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F252",
+      "symbolic_mnemonic": "ACHK",
+      "operands_syntax": "S1, S2, S3",
+      "name": "ASCII code check of multiple ASCII data strings",
+      "steps": "10",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-18\"",
+      "full_syntax": "F252 (ACHK) S1, S2, S3"
+    },
+    {
+      "fun_no": "F253",
+      "symbolic_mnemonic": "SSET",
+      "operands_syntax": "S1, S2, D",
+      "name": "Character constant → ASCII code conversion (with storage area size)",
+      "steps": "8-264 (Note 1)",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-20\"",
+      "full_syntax": "F253 (SSET) S1, S2, D"
+    },
+    {
+      "fun_no": "F254",
+      "symbolic_mnemonic": "PRINT(Note 2)",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Text creation",
+      "steps": "10-266 (Note 1)",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-24\"",
+      "full_syntax": "F254 (PRINT(Note 2)) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F257",
+      "symbolic_mnemonic": "SCMP",
+      "operands_syntax": "S1, S2, D",
+      "name": "Character string comparison",
+      "steps": "10",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-38\"",
+      "full_syntax": "F257 (SCMP) S1, S2, D"
+    },
+    {
+      "fun_no": "F258",
+      "symbolic_mnemonic": "SADD",
+      "operands_syntax": "S1, S2, D",
+      "name": "Character string addition",
+      "steps": "12",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-40\"",
+      "full_syntax": "F258 (SADD) S1, S2, D"
+    },
+    {
+      "fun_no": "F259",
+      "symbolic_mnemonic": "LEN",
+      "operands_syntax": "S, D",
+      "name": "Character string length",
+      "steps": "6",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-42\"",
+      "full_syntax": "F259 (LEN) S, D"
+    },
+    {
+      "fun_no": "F260",
+      "symbolic_mnemonic": "SSRC",
+      "operands_syntax": "S1, S2, D",
+      "name": "Character string search",
+      "steps": "10",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-44\"",
+      "full_syntax": "F260 (SSRC) S1, S2, D"
+    },
+    {
+      "fun_no": "F261",
+      "symbolic_mnemonic": "RIGHT",
+      "operands_syntax": "S1, S2, D",
+      "name": "Right retrieve from character string",
+      "steps": "8",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-46\"",
+      "full_syntax": "F261 (RIGHT) S1, S2, D"
+    },
+    {
+      "fun_no": "F262",
+      "symbolic_mnemonic": "LEFT",
+      "operands_syntax": "S1, S2, D",
+      "name": "Left retrieve from character string",
+      "steps": "8",
+      "category": "Character String Instructions",
+      "manual_ref": "\"P. 25-48\"",
+      "full_syntax": "F262 (LEFT) S1, S2, D"
+    },
+    {
+      "fun_no": "F263",
+      "symbolic_mnemonic": "MIDR",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Read from any position in character string",
+      "steps": "10",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 25-50\"",
+      "full_syntax": "F263 (MIDR) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F264",
+      "symbolic_mnemonic": "MIDW",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Write to any position in character string",
+      "steps": "12",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 25-52\"",
+      "full_syntax": "F264 (MIDW) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F265",
+      "symbolic_mnemonic": "SREP",
+      "operands_syntax": "S, D, P, n",
+      "name": "Replace character string",
+      "steps": "12",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 25-54\"",
+      "full_syntax": "F265 (SREP) S, D, P, n"
+    },
+    {
+      "fun_no": "F270",
+      "symbolic_mnemonic": "MAX",
+      "operands_syntax": "S1, S2, D",
+      "name": "Search maximum value from 16-bit data block",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-2\"",
+      "full_syntax": "F270 (MAX) S1, S2, D"
+    },
+    {
+      "fun_no": "F271",
+      "symbolic_mnemonic": "DMAX",
+      "operands_syntax": "S1, S2, D",
+      "name": "Search maximum value from 32-bit data block",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-4\"",
+      "full_syntax": "F271 (DMAX) S1, S2, D"
+    },
+    {
+      "fun_no": "F272",
+      "symbolic_mnemonic": "MIN",
+      "operands_syntax": "S1, S2, D",
+      "name": "Search minimum value from 16-bit data block",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-6\"",
+      "full_syntax": "F272 (MIN) S1, S2, D"
+    },
+    {
+      "fun_no": "F273",
+      "symbolic_mnemonic": "DMIN",
+      "operands_syntax": "S1, S2, D",
+      "name": "Search minimum value from 32-bit data block",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-8\"",
+      "full_syntax": "F273 (DMIN) S1, S2, D"
+    },
+    {
+      "fun_no": "F275",
+      "symbolic_mnemonic": "MEAN",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data sum and average",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-10\"",
+      "full_syntax": "F275 (MEAN) S1, S2, D"
+    },
+    {
+      "fun_no": "F276",
+      "symbolic_mnemonic": "DMEAN",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data sum and average",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-12\"",
+      "full_syntax": "F276 (DMEAN) S1, S2, D"
+    },
+    {
+      "fun_no": "F277",
+      "symbolic_mnemonic": "SORT",
+      "operands_syntax": "S1, S2, S3",
+      "name": "16-bit data block sort",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-14\"",
+      "full_syntax": "F277 (SORT) S1, S2, S3"
+    },
+    {
+      "fun_no": "F278",
+      "symbolic_mnemonic": "DSORT",
+      "operands_syntax": "S1, S2, S3",
+      "name": "32-bit data block sort",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-16\"",
+      "full_syntax": "F278 (DSORT) S1, S2, S3"
+    },
+    {
+      "fun_no": "F282",
+      "symbolic_mnemonic": "SCAL",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data linearization",
+      "steps": "8",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-18\"",
+      "full_syntax": "F282 (SCAL) S1, S2, D"
+    },
+    {
+      "fun_no": "F283",
+      "symbolic_mnemonic": "DSCAL",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data linearization",
+      "steps": "10",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-21\"",
+      "full_syntax": "F283 (DSCAL) S1, S2, D"
+    },
+    {
+      "fun_no": "F284",
+      "symbolic_mnemonic": "RAMP",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "16-bit data ramp output",
+      "steps": "10",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-24\"",
+      "full_syntax": "F284 (RAMP) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F285",
+      "symbolic_mnemonic": "LIMT",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "16-bit data upper and lower limit control",
+      "steps": "10",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-26\"",
+      "full_syntax": "F285 (LIMT) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F286",
+      "symbolic_mnemonic": "DLIMT",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "32-bit data upper and lower limit control",
+      "steps": "16",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-28\"",
+      "full_syntax": "F286 (DLIMT) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F287",
+      "symbolic_mnemonic": "BAND",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "16-bit data deadband control",
+      "steps": "10",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-30\"",
+      "full_syntax": "F287 (BAND) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F288",
+      "symbolic_mnemonic": "DBAND",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "32-bit data deadband control",
+      "steps": "16",
+      "category": "Data manipulation instructions",
+      "manual_ref": "\"P. 26-32\"",
+      "full_syntax": "F288 (DBAND) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F289",
+      "symbolic_mnemonic": "ZONE",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "16-bit data zone control",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 26-34\"",
+      "full_syntax": "F289 (ZONE) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F290",
+      "symbolic_mnemonic": "DZONE",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "32-bit data zone control",
+      "steps": "16",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 26-36\"",
+      "full_syntax": "F290 (DZONE) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F309",
+      "symbolic_mnemonic": "FMV",
+      "operands_syntax": "S, D",
+      "name": "Floating point data move",
+      "steps": "8",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-3\"",
+      "full_syntax": "F309 (FMV) S, D"
+    },
+    {
+      "fun_no": "F310",
+      "symbolic_mnemonic": "F+",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data addition",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-5\"",
+      "full_syntax": "F310 (F+) S1, S2, D"
+    },
+    {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    },
+    {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    },
+    {
+      "fun_no": "F313",
+      "symbolic_mnemonic": "F%",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data division",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-11\"",
+      "full_syntax": "F313 (F%) S1, S2, D"
+    },
+    {
+      "fun_no": "F314",
+      "symbolic_mnemonic": "SIN",
+      "operands_syntax": "S, D",
+      "name": "Floating point data sine operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-13\"",
+      "full_syntax": "F314 (SIN) S, D"
+    },
+    {
+      "fun_no": "F315",
+      "symbolic_mnemonic": "COS",
+      "operands_syntax": "S, D",
+      "name": "Floating point data cosine operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-15\"",
+      "full_syntax": "F315 (COS) S, D"
+    },
+    {
+      "fun_no": "F316",
+      "symbolic_mnemonic": "TAN",
+      "operands_syntax": "S, D",
+      "name": "Floating point data tangent operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-17\"",
+      "full_syntax": "F316 (TAN) S, D"
+    },
+    {
+      "fun_no": "F317",
+      "symbolic_mnemonic": "ASIN",
+      "operands_syntax": "S, D",
+      "name": "Floating point data arcsine operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-19\"",
+      "full_syntax": "F317 (ASIN) S, D"
+    },
+    {
+      "fun_no": "F318",
+      "symbolic_mnemonic": "ACOS",
+      "operands_syntax": "S, D",
+      "name": "Floating point data arccosine operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-21\"",
+      "full_syntax": "F318 (ACOS) S, D"
+    },
+    {
+      "fun_no": "F319",
+      "symbolic_mnemonic": "ATAN",
+      "operands_syntax": "S, D",
+      "name": "Floating point data arctangent operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-23\"",
+      "full_syntax": "F319 (ATAN) S, D"
+    },
+    {
+      "fun_no": "F320",
+      "symbolic_mnemonic": "LN",
+      "operands_syntax": "S, D",
+      "name": "Floating point data natural logarithmic operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-25\"",
+      "full_syntax": "F320 (LN) S, D"
+    },
+    {
+      "fun_no": "F321",
+      "symbolic_mnemonic": "EXP",
+      "operands_syntax": "S, D",
+      "name": "Floating point data exponent operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-27\"",
+      "full_syntax": "F321 (EXP) S, D"
+    },
+    {
+      "fun_no": "F322",
+      "symbolic_mnemonic": "LOG",
+      "operands_syntax": "S, D",
+      "name": "Floating point data logarithm operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-29\"",
+      "full_syntax": "F322 (LOG) S, D"
+    },
+    {
+      "fun_no": "F323",
+      "symbolic_mnemonic": "PWR",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data power operation",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-31\"",
+      "full_syntax": "F323 (PWR) S1, S2, D"
+    },
+    {
+      "fun_no": "F324",
+      "symbolic_mnemonic": "FSQR",
+      "operands_syntax": "S, D",
+      "name": "Floating point data square root operation",
+      "steps": "10",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-33\"",
+      "full_syntax": "F324 (FSQR) S, D"
+    },
+    {
+      "fun_no": "F325",
+      "symbolic_mnemonic": "FLT",
+      "operands_syntax": "S, D",
+      "name": "16-bit integer to floating point data conversion",
+      "steps": "6",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-35\"",
+      "full_syntax": "F325 (FLT) S, D"
+    },
+    {
+      "fun_no": "F326",
+      "symbolic_mnemonic": "DFLT",
+      "operands_syntax": "S, D",
+      "name": "32-bit integer to floating point data conversion",
+      "steps": "8",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-36\"",
+      "full_syntax": "F326 (DFLT) S, D"
+    },
+    {
+      "fun_no": "F327",
+      "symbolic_mnemonic": "INT",
+      "operands_syntax": "S, D",
+      "name": "Convert to largest 16-bit integer that does not exceed floating point data",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-38\"",
+      "full_syntax": "F327 (INT) S, D"
+    },
+    {
+      "fun_no": "F328",
+      "symbolic_mnemonic": "DINT",
+      "operands_syntax": "S, D",
+      "name": "Convert to largest 32-bit integer that does not exceed floating point data",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-40\"",
+      "full_syntax": "F328 (DINT) S, D"
+    },
+    {
+      "fun_no": "F329",
+      "symbolic_mnemonic": "FIX",
+      "operands_syntax": "S, D",
+      "name": "Convert floating point data to truncated 16-bit integer",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-42\"",
+      "full_syntax": "F329 (FIX) S, D"
+    },
+    {
+      "fun_no": "F330",
+      "symbolic_mnemonic": "DFIX",
+      "operands_syntax": "S, D",
+      "name": "Convert floating point data to truncated 32-bit integer",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-44\"",
+      "full_syntax": "F330 (DFIX) S, D"
+    },
+    {
+      "fun_no": "F331",
+      "symbolic_mnemonic": "ROFF",
+      "operands_syntax": "S, D",
+      "name": "Convert floating point data to rounded 16-bit integer",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-46\"",
+      "full_syntax": "F331 (ROFF) S, D"
+    },
+    {
+      "fun_no": "F332",
+      "symbolic_mnemonic": "DROFF",
+      "operands_syntax": "S, D",
+      "name": "Convert floating point data to rounded 32-bit integer",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-48\"",
+      "full_syntax": "F332 (DROFF) S, D"
+    },
+    {
+      "fun_no": "F333",
+      "symbolic_mnemonic": "FINT",
+      "operands_syntax": "S, D",
+      "name": "Truncate floating point data after decimal",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-50\"",
+      "full_syntax": "F333 (FINT) S, D"
+    },
+    {
+      "fun_no": "F334",
+      "symbolic_mnemonic": "FRINT",
+      "operands_syntax": "S, D",
+      "name": "Round floating point data after decimal",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-52\"",
+      "full_syntax": "F334 (FRINT) S, D"
+    },
+    {
+      "fun_no": "F335",
+      "symbolic_mnemonic": "F+/-",
+      "operands_syntax": "S, D",
+      "name": "Floating point data sign conversion",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-54\"",
+      "full_syntax": "F335 (F+/-) S, D"
+    },
+    {
+      "fun_no": "F336",
+      "symbolic_mnemonic": "FABS",
+      "operands_syntax": "S, D",
+      "name": "Floating point data absolute value conversion",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-56\"",
+      "full_syntax": "F336 (FABS) S, D"
+    },
+    {
+      "fun_no": "F337",
+      "symbolic_mnemonic": "RAD",
+      "operands_syntax": "S, D",
+      "name": "Degree to radian conversion",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-58\"",
+      "full_syntax": "F337 (RAD) S, D"
+    },
+    {
+      "fun_no": "F338",
+      "symbolic_mnemonic": "DEG",
+      "operands_syntax": "S, D",
+      "name": "Radian to degree conversion",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-60\"",
+      "full_syntax": "F338 (DEG) S, D"
+    },
+    {
+      "fun_no": "F345",
+      "symbolic_mnemonic": "FCMP",
+      "operands_syntax": "S1, S2",
+      "name": "Floating point data comparison",
+      "steps": "10",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 28-2\"",
+      "full_syntax": "F345 (FCMP) S1, S2"
+    },
+    {
+      "fun_no": "F346",
+      "symbolic_mnemonic": "FWIN",
+      "operands_syntax": "S1, S2, S3",
+      "name": "Floating point data band comparison",
+      "steps": "14",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 28-4\"",
+      "full_syntax": "F346 (FWIN) S1, S2, S3"
+    },
+    {
+      "fun_no": "F347",
+      "symbolic_mnemonic": "FLIMT",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Floating point data lower limit and upper limit control",
+      "steps": "18",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 28-6\"",
+      "full_syntax": "F347 (FLIMT) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F348",
+      "symbolic_mnemonic": "FBAND",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Floating point data deadband control",
+      "steps": "18",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 28-8\"",
+      "full_syntax": "F348 (FBAND) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F349",
+      "symbolic_mnemonic": "FZONE",
+      "operands_syntax": "S1, S2, S3, D",
+      "name": "Floating point data zone control",
+      "steps": "18",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 28-10\"",
+      "full_syntax": "F349 (FZONE) S1, S2, S3, D"
+    },
+    {
+      "fun_no": "F354",
+      "symbolic_mnemonic": "FSCAL",
+      "operands_syntax": "S1, S2, D",
+      "name": "Real number data scaling",
+      "steps": "12",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 28-12\"",
+      "full_syntax": "F354 (FSCAL) S1, S2, D"
+    },
+    {
+      "fun_no": "F355",
+      "symbolic_mnemonic": "PID",
+      "operands_syntax": "S",
+      "name": "PID operation",
+      "steps": "4",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 29-2\"",
+      "full_syntax": "F355 (PID) S"
+    },
+    {
+      "fun_no": "F356",
+      "symbolic_mnemonic": "EZPID",
+      "operands_syntax": "S1, S2, S3, S4",
+      "name": "PID operation: PWM output possible",
+      "steps": "10",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 29-9\"",
+      "full_syntax": "F356 (EZPID) S1, S2, S3, S4"
+    },
+    {
+      "fun_no": "F380",
+      "symbolic_mnemonic": "POSST",
+      "operands_syntax": "S1, S2, S3",
+      "name": "Positioning table start",
+      "steps": "8",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 30-2\"",
+      "full_syntax": "F380 (POSST) S1, S2, S3"
+    },
+    {
+      "fun_no": "F381",
+      "symbolic_mnemonic": "JOGST",
+      "operands_syntax": "S1, S2",
+      "name": "JOG operation start",
+      "steps": "6",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 30-4\"",
+      "full_syntax": "F381 (JOGST) S1, S2"
+    },
+    {
+      "fun_no": "F382",
+      "symbolic_mnemonic": "ORGST",
+      "operands_syntax": "S",
+      "name": "Home return start",
+      "steps": "4",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 30-6\"",
+      "full_syntax": "F382 (ORGST) S"
+    },
+    {
+      "fun_no": "F383",
+      "symbolic_mnemonic": "MPOST",
+      "operands_syntax": "S",
+      "name": "Positioning simultaneous start",
+      "steps": "4",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 30-7\"",
+      "full_syntax": "F383 (MPOST) S"
+    },
+    {
+      "fun_no": "F384",
+      "symbolic_mnemonic": "PTBLR",
+      "operands_syntax": "S1, S2, n, D",
+      "name": "Positioning parameter read",
+      "steps": "10",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 30-9\"",
+      "full_syntax": "F384 (PTBLR) S1, S2, n, D"
+    },
+    {
+      "fun_no": "F385",
+      "symbolic_mnemonic": "PTBLW",
+      "operands_syntax": "S1, S2, n, D",
+      "name": "Positioning parameter write",
+      "steps": "10",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 30-11\"",
+      "full_syntax": "F385 (PTBLW) S1, S2, n, D"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "S, DT90348",
+      "name": "Pulse output elapsed value read",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) S, DT90348"
+    },
+    {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    },
+    {
+      "fun_no": "F171",
+      "symbolic_mnemonic": "SPDH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (Trapezoidal control)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-3\"",
+      "full_syntax": "F171 (SPDH) S, n"
+    },
+    {
+      "fun_no": "F171",
+      "symbolic_mnemonic": "SPDH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (Home return)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-9\"",
+      "full_syntax": "F171 (SPDH) S, n"
+    },
+    {
+      "fun_no": "F172",
+      "symbolic_mnemonic": "PLSH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (JOG operation)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-14\"",
+      "full_syntax": "F172 (PLSH) S, n"
+    },
+    {
+      "fun_no": "F174",
+      "symbolic_mnemonic": "SP0H",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (Selectable data table control operation)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-17\"",
+      "full_syntax": "F174 (SP0H) S, n"
+    },
+    {
+      "fun_no": "F175",
+      "symbolic_mnemonic": "SPSH",
+      "operands_syntax": "S, n",
+      "name": "Pulse output (linear interpolation)",
+      "steps": "5",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.31-22\"",
+      "full_syntax": "F175 (SPSH) S, n"
+    },
+    {
+      "fun_no": "F420",
+      "symbolic_mnemonic": "LOGST",
+      "operands_syntax": "n",
+      "name": "Logging trace start request",
+      "steps": "4",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P. 32-2\"",
+      "full_syntax": "F420 (LOGST) n"
+    },
+    {
+      "fun_no": "F421",
+      "symbolic_mnemonic": "LOGED",
+      "operands_syntax": "n",
+      "name": "Logging trace stop request",
+      "steps": "4",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 32-3\"",
+      "full_syntax": "F421 (LOGED) n"
+    },
+    {
+      "fun_no": "F422",
+      "symbolic_mnemonic": "LOGSMPL",
+      "operands_syntax": "n",
+      "name": "Sampling trace",
+      "steps": "4",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 32-4\"",
+      "full_syntax": "F422 (LOGSMPL) n"
+    },
+    {
+      "fun_no": "F425",
+      "symbolic_mnemonic": "CDTWT",
+      "operands_syntax": "S, n, D",
+      "name": "Write file to operation memory in BIN format",
+      "steps": "8",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-6\"",
+      "full_syntax": "F425 (CDTWT) S, n, D"
+    },
+    {
+      "fun_no": "F426",
+      "symbolic_mnemonic": "CDTRD",
+      "operands_syntax": "S, n, D",
+      "name": "Read from BIN format file to operation memory",
+      "steps": "8",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-8\"",
+      "full_syntax": "F426 (CDTRD) S, n, D"
+    },
+    {
+      "fun_no": "F427",
+      "symbolic_mnemonic": "CWT",
+      "operands_syntax": "S, n, D1, D2",
+      "name": "File data write",
+      "steps": "10-266",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-10\"",
+      "full_syntax": "F427 (CWT) S, n, D1, D2"
+    },
+    {
+      "fun_no": "F428",
+      "symbolic_mnemonic": "CRD",
+      "operands_syntax": "S1, S2, n, D",
+      "name": "File data read",
+      "steps": "10-266",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-23\"",
+      "full_syntax": "F428 (CRD) S1, S2, n, D"
+    },
+    {
+      "fun_no": "F429",
+      "symbolic_mnemonic": "CMKDIR",
+      "operands_syntax": "S",
+      "name": "Directory creation",
+      "steps": "4-260",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-32\"",
+      "full_syntax": "F429 (CMKDIR) S"
+    },
+    {
+      "fun_no": "F430",
+      "symbolic_mnemonic": "CRMDIR",
+      "operands_syntax": "S",
+      "name": "Directory deletion",
+      "steps": "4-260",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-35\"",
+      "full_syntax": "F430 (CRMDIR) S"
+    },
+    {
+      "fun_no": "F431",
+      "symbolic_mnemonic": "CRMDIRFL",
+      "operands_syntax": "S",
+      "name": "Directory deletion (valid with files)",
+      "steps": "4-260",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-35\"",
+      "full_syntax": "F431 (CRMDIRFL) S"
+    },
+    {
+      "fun_no": "F432",
+      "symbolic_mnemonic": "CFDEL",
+      "operands_syntax": "S",
+      "name": "File deletion",
+      "steps": "4-260",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-39\"",
+      "full_syntax": "F432 (CFDEL) S"
+    },
+    {
+      "fun_no": "F433",
+      "symbolic_mnemonic": "CPR",
+      "operands_syntax": "S, D",
+      "name": "ASCII data write to file",
+      "steps": "6-518",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-41\"",
+      "full_syntax": "F433 (CPR) S, D"
+    },
+    {
+      "fun_no": "F434",
+      "symbolic_mnemonic": "CRD1",
+      "operands_syntax": "S, D1, D2",
+      "name": "One line read from file",
+      "steps": "8-264",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-44\"",
+      "full_syntax": "F434 (CRD1) S, D1, D2"
+    },
+    {
+      "fun_no": "F435",
+      "symbolic_mnemonic": "CREN",
+      "operands_syntax": "S1, S2",
+      "name": "File rename",
+      "steps": "6-518",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-50\"",
+      "full_syntax": "F435 (CREN) S1, S2"
+    },
+    {
+      "fun_no": "F436",
+      "symbolic_mnemonic": "CCOPY",
+      "operands_syntax": "S1, S2, S3",
+      "name": "File copy",
+      "steps": "8-520",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-52\"",
+      "full_syntax": "F436 (CCOPY) S1, S2, S3"
+    },
+    {
+      "fun_no": "F437",
+      "symbolic_mnemonic": "CMV",
+      "operands_syntax": "S1, S2, S3",
+      "name": "File move",
+      "steps": "8-520",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-55\"",
+      "full_syntax": "F437 (CMV) S1, S2, S3"
+    },
+    {
+      "fun_no": "F438",
+      "symbolic_mnemonic": "CFREE",
+      "operands_syntax": "D",
+      "name": "SD memory card free capacity acquisition: byte unit",
+      "steps": "4",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-58\"",
+      "full_syntax": "F438 (CFREE) D"
+    },
+    {
+      "fun_no": "F439",
+      "symbolic_mnemonic": "CFREEK",
+      "operands_syntax": "D",
+      "name": "SD memory card free capacity acquisition: kilobyte unit",
+      "steps": "4",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-60\"",
+      "full_syntax": "F439 (CFREEK) D"
+    },
+    {
+      "fun_no": "F440",
+      "symbolic_mnemonic": "CFLS",
+      "operands_syntax": "S, D",
+      "name": "File status acquisition",
+      "steps": "6-262",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-62\"",
+      "full_syntax": "F440 (CFLS) S, D"
+    },
+    {
+      "fun_no": "F441",
+      "symbolic_mnemonic": "PanaSD",
+      "operands_syntax": "D1, D2, D3",
+      "name": "Panasonic SD card lifetime information read",
+      "steps": "8",
+      "category": "SD card access instructions",
+      "manual_ref": "\"P. 33-65\"",
+      "full_syntax": "F441 (PanaSD) D1, D2, D3"
+    },
+    {
+      "fun_no": "F460",
+      "symbolic_mnemonic": "IPv4SET",
+      "operands_syntax": "S",
+      "name": "Ipv4 address setting",
+      "steps": "4-260",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-2\"",
+      "full_syntax": "F460 (IPv4SET) S"
+    },
+    {
+      "fun_no": "F461",
+      "symbolic_mnemonic": "CONSET",
+      "operands_syntax": "S1, S2, D1, D2",
+      "name": "Connection setting",
+      "steps": "10-522",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-7\"",
+      "full_syntax": "F461 (CONSET) S1, S2, D1, D2"
+    },
+    {
+      "fun_no": "F462",
+      "symbolic_mnemonic": "OPEN",
+      "operands_syntax": "S",
+      "name": "Connection open",
+      "steps": "4",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-14\"",
+      "full_syntax": "F462 (OPEN) S"
+    },
+    {
+      "fun_no": "F463",
+      "symbolic_mnemonic": "CLOSE",
+      "operands_syntax": "S",
+      "name": "Connection close",
+      "steps": "4",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-16\"",
+      "full_syntax": "F463 (CLOSE) S"
+    },
+    {
+      "fun_no": "F464",
+      "symbolic_mnemonic": "RDET",
+      "operands_syntax": "D",
+      "name": "Ethernet Status Read",
+      "steps": "4",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-18\"",
+      "full_syntax": "F464 (RDET) D"
+    },
+    {
+      "fun_no": "F465",
+      "symbolic_mnemonic": "ETSTAT",
+      "operands_syntax": "S1, S2, D",
+      "name": "Ethernet Information Acquisition",
+      "steps": "8-520",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-21\"",
+      "full_syntax": "F465 (ETSTAT) S1, S2, D"
+    },
+    {
+      "fun_no": "P466",
+      "symbolic_mnemonic": "NTPcREQ",
+      "operands_syntax": "S1, S2, D",
+      "name": "Time adjustment request",
+      "steps": "8",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-25\"",
+      "full_syntax": "P466 (NTPcREQ) S1, S2, D"
+    },
+    {
+      "fun_no": "F467",
+      "symbolic_mnemonic": "NTPcSV",
+      "operands_syntax": "S1, S2, S3",
+      "name": "NTP destination server settings",
+      "steps": "8-776",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-31\"",
+      "full_syntax": "F467 (NTPcSV) S1, S2, S3"
+    },
+    {
+      "fun_no": "P468",
+      "symbolic_mnemonic": "PINGREQ",
+      "operands_syntax": "S, D",
+      "name": "PING send request",
+      "steps": "6",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-36\"",
+      "full_syntax": "P468 (PINGREQ) S, D"
+    },
+    {
+      "fun_no": "F469",
+      "symbolic_mnemonic": "UNITSEL",
+      "operands_syntax": "S1, S2",
+      "name": "Specify communication unit slot port",
+      "steps": "6",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 34-40\"",
+      "full_syntax": "F469 (UNITSEL) S1, S2"
+    },
+    {
+      "fun_no": "F465",
+      "symbolic_mnemonic": "ETSTAT",
+      "operands_syntax": "S1, S2, D",
+      "name": "Information acquisition of EtherNet/IP",
+      "steps": "8-520",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-2\"",
+      "full_syntax": "F465 (ETSTAT) S1, S2, D"
+    },
+    {
+      "fun_no": "F490",
+      "symbolic_mnemonic": "EIPNDST",
+      "operands_syntax": "S, D1, D2",
+      "name": "EtherNet/IP node status acquisition instruction",
+      "steps": "8",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-9\"",
+      "full_syntax": "F490 (EIPNDST) S, D1, D2"
+    },
+    {
+      "fun_no": "F495",
+      "symbolic_mnemonic": "EIPMSATT",
+      "operands_syntax": "S",
+      "name": "EIP message destination setting",
+      "steps": "4",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-13\"",
+      "full_syntax": "F495 (EIPMSATT) S"
+    },
+    {
+      "fun_no": "F496",
+      "symbolic_mnemonic": "EIPMBODY",
+      "operands_syntax": "S",
+      "name": "EIP message body setting",
+      "steps": "4",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-16\"",
+      "full_syntax": "F496 (EIPMBODY) S"
+    },
+    {
+      "fun_no": "F497",
+      "symbolic_mnemonic": "EIPMSEND",
+      "operands_syntax": "D1, D2",
+      "name": "EIP message transmission",
+      "steps": "6",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-19\"",
+      "full_syntax": "F497 (EIPMSEND) D1, D2"
+    },
+    {
+      "fun_no": "F498",
+      "symbolic_mnemonic": "CIPMSET",
+      "operands_syntax": "S1, S2, D",
+      "name": "CIP message data generation (combination)",
+      "steps": "8",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-23\"",
+      "full_syntax": "F498 (CIPMSET) S1, S2, D"
+    },
+    {
+      "fun_no": "F499",
+      "symbolic_mnemonic": "CIPMGET",
+      "operands_syntax": "S1, S2, D1, D2",
+      "name": "Data acquisition from CIP message",
+      "steps": "10",
+      "category": "EtherNet/IP instructions (C32ET only)",
+      "manual_ref": "\"P. 35-28\"",
+      "full_syntax": "F499 (CIPMGET) S1, S2, D1, D2"
+    },
+    {
+      "fun_no": "F465",
+      "symbolic_mnemonic": "ETSTAT",
+      "operands_syntax": "S1, S2, D",
+      "name": "EtherNet/IP information acquisition: FTP",
+      "steps": "8-520",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-2\"",
+      "full_syntax": "F465 (ETSTAT) S1, S2, D"
+    },
+    {
+      "fun_no": "F470",
+      "symbolic_mnemonic": "FTPcSV",
+      "operands_syntax": "S1, S2, S3",
+      "name": "FTP client connected server setting",
+      "steps": "8-776",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-8\"",
+      "full_syntax": "F470 (FTPcSV) S1, S2, S3"
+    },
+    {
+      "fun_no": "F471",
+      "symbolic_mnemonic": "FTPcSET",
+      "operands_syntax": "S1, S2, S3, S4",
+      "name": "FTP client transfer setting",
+      "steps": "10-1034",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-14\"",
+      "full_syntax": "F471 (FTPcSET) S1, S2, S3, S4"
+    },
+    {
+      "fun_no": "F472",
+      "symbolic_mnemonic": "FTPcLOG",
+      "operands_syntax": "S1, S2, S3",
+      "name": "Logging/Trace transfer settings",
+      "steps": "8-776",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-22\"",
+      "full_syntax": "F472 (FTPcLOG) S1, S2, S3"
+    },
+    {
+      "fun_no": "F473",
+      "symbolic_mnemonic": "FTPcREQ",
+      "operands_syntax": "S",
+      "name": "FTP client transfer request",
+      "steps": "4",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-25\"",
+      "full_syntax": "F473 (FTPcREQ) S"
+    },
+    {
+      "fun_no": "F474",
+      "symbolic_mnemonic": "FTPcCTL",
+      "operands_syntax": "S1, S2",
+      "name": "FTP client transfer control",
+      "steps": "6-518",
+      "category": "FTP instruction (C32ET only)",
+      "manual_ref": "\"P. 36-29\"",
+      "full_syntax": "F474 (FTPcCTL) S1, S2"
+    }
+  ]
+}
