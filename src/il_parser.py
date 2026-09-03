@@ -5,15 +5,16 @@ Soporta:
 2. Formato en línea simple (ej. "0 ST X0", "F0 (MV) K10 DT0") y formato multilínea indentado con comentarios (*...*).
 3. Normalización y resolución de alias IEC de comparación (ST_EQ, AND_GT, ANF_LT, etc.) y flancos (ST↑, AN^, etc.).
 4. Detección automática de subrutinas (SUB Px ... RET o Px: ... RET).
-5. Enriquecimiento de cada instrucción con metadatos del dataset y mapa de operandos.
-6. Exportación a JSON estructurado para LLMs / IA.
+5. Mapeo OPCIONAL de tabla de símbolos/tags exportada en CSV desde FPWIN Pro.
+6. Enriquecimiento de cada instrucción con metadatos del dataset y nombres de variables reales.
+7. Exportación a JSON estructurado para LLMs / IA.
 """
 import json
 import re
 import os
 
 class PanasonicFPDecompiler:
-    def __init__(self, dataset_path=None):
+    def __init__(self, dataset_path=None, symbols_csv_path=None):
         if dataset_path is None:
             dataset_path = os.path.join(
                 os.path.dirname(__file__), "..", "data", "panasonic_fp_complete_dataset.json"
@@ -21,12 +22,11 @@ class PanasonicFPDecompiler:
         with open(dataset_path, "r", encoding="utf-8") as f:
             self.db = json.load(f)
 
-        # Mapeos de búsqueda rápida
+        # Mapeos de búsqueda rápida de instrucciones
         self.basic_map = {}
         for item in self.db["basic_instructions"]:
             mnem = item["mnemonic"].strip().upper()
             self.basic_map[mnem] = item
-            # Normalizar sin espacios internos (ej "AN =" -> "AN=")
             norm_mnem = re.sub(r"\s+", "", mnem)
             self.basic_map[norm_mnem] = item
 
@@ -38,32 +38,57 @@ class PanasonicFPDecompiler:
 
         # Diccionario de alias para nombres exportados por FPWIN Pro
         self.comparison_aliases = {
-            # 16-bit Start
             "ST_EQ": "ST=", "ST_NE": "ST<>", "ST_GT": "ST>", "ST_GE": "ST>=", "ST_LT": "ST<", "ST_LE": "ST<=",
-            # 32-bit Start
             "STD_EQ": "STD=", "STD_NE": "STD<>", "STD_GT": "STD>", "STD_GE": "STD>=", "STD_LT": "STD<", "STD_LE": "STD<=",
-            # Real/Float Start
             "STF_EQ": "STF=", "STF_NE": "STF<>", "STF_GT": "STF>", "STF_GE": "STF>=", "STF_LT": "STF<", "STF_LE": "STF<=",
-            # 16-bit AND
             "AN_EQ": "AN=", "AN_NE": "AN<>", "AN_GT": "AN>", "AN_GE": "AN>=", "AN_LT": "AN<", "AN_LE": "AN<=",
-            # 32-bit AND
             "AND_EQ": "AND=", "AND_NE": "AND<>", "AND_GT": "AND>", "AND_GE": "AND>=", "AND_LT": "AND<", "AND_LE": "AND<=",
-            # Real/Float AND
             "ANF_EQ": "ANF=", "ANF_NE": "ANF<>", "ANF_GT": "ANF>", "ANF_GE": "ANF>=", "ANF_LT": "ANF<", "ANF_LE": "ANF<=",
-            # 16-bit OR
             "OR_EQ": "OR=", "OR_NE": "OR<>", "OR_GT": "OR>", "OR_GE": "OR>=", "OR_LT": "OR<", "OR_LE": "OR<=",
-            # 32-bit OR
             "ORD_EQ": "ORD=", "ORD_NE": "ORD<>", "ORD_GT": "ORD>", "ORD_GE": "ORD>=", "ORD_LT": "ORD<", "ORD_LE": "ORD<=",
-            # Flancos alternativos
             "ST^": "ST↑", "ST_UP": "ST↑", "STV": "ST↓", "ST_DOWN": "ST↓",
             "AN^": "AN↑", "AN_UP": "AN↑", "ANV": "AN↓", "AN_DOWN": "AN↓",
             "OR^": "OR↑", "OR_UP": "OR↑", "ORV": "OR↓", "OR_DOWN": "OR↓",
             "OT^": "OT↑", "OT_UP": "OT↑", "OTV": "OT↓", "OT_DOWN": "OT↓"
         }
 
+        # Cargar tabla de símbolos si se proporciona
+        self.symbol_table = {}
+        if symbols_csv_path:
+            self.load_symbols_csv(symbols_csv_path)
+
+    def load_symbols_csv(self, csv_path: str):
+        """Carga tabla de tags desde CSV exportado por FPWIN Pro."""
+        for enc in ["utf-16le", "utf-8", "latin1"]:
+            try:
+                with open(csv_path, "r", encoding=enc) as f:
+                    lines = f.readlines()
+                    break
+            except Exception:
+                continue
+        
+        count = 0
+        for line in lines:
+            parts = [p.strip().strip('"') for p in line.strip().split(",")]
+            if len(parts) >= 5:
+                tag_name = parts[1]
+                iec_addr = parts[2]
+                hw_addr = parts[3].upper()
+                dtype = parts[4]
+                comment = parts[6] if len(parts) > 6 else ""
+                
+                if hw_addr:
+                    self.symbol_table[hw_addr] = {
+                        "tag": tag_name,
+                        "dtype": dtype,
+                        "iec": iec_addr,
+                        "comment": comment
+                    }
+                    count += 1
+        return count
+
     def _resolve_instruction_info(self, raw_token: str):
         token = raw_token.strip().upper()
-        # Resolver alias
         token = self.comparison_aliases.get(token, token)
         norm_token = re.sub(r"\s+", "", token)
 
@@ -78,8 +103,20 @@ class PanasonicFPDecompiler:
 
         return raw_token, "unknown", None
 
+    def _tag_operand(self, operand_str: str):
+        """Enriquece un operando de hardware con su Tag si existe en la tabla de símbolos."""
+        op_clean = operand_str.strip().upper()
+        if op_clean in self.symbol_table:
+            info = self.symbol_table[op_clean]
+            return {
+                "raw": operand_str,
+                "tag": info["tag"],
+                "dtype": info["dtype"],
+                "comment": info["comment"]
+            }
+        return {"raw": operand_str}
+
     def analyze_file(self, file_path: str):
-        """Lee un archivo de código exportado probando UTF-8 y UTF-16LE."""
         raw_text = None
         for enc in ["utf-16le", "utf-8", "latin1"]:
             try:
@@ -108,7 +145,6 @@ class PanasonicFPDecompiler:
                 i += 1
                 continue
 
-            # Detectar número de paso inicial si existe (ej. "0 ST X0")
             step_match = re.match(r"^(\d+)\s+(.*)$", line)
             if step_match:
                 step_val = int(step_match.group(1))
@@ -117,7 +153,6 @@ class PanasonicFPDecompiler:
                 step_val = step_counter
                 line_content = line
 
-            # Caso 1: Definición de Subrutina SUB P0 o P0:
             sub_match = re.match(r"^(?:SUB\s+)?(P\d+):?$", line_content, re.IGNORECASE)
             if sub_match and not line_content.upper().startswith("CALL"):
                 sub_label = sub_match.group(1).upper()
@@ -127,7 +162,6 @@ class PanasonicFPDecompiler:
                 i += 1
                 continue
 
-            # Limpiar comentarios tipo (*DCMP*) o (*MV*)
             comment_match = re.search(r"\(\*(.*?)\*\)", line_content)
             inline_comment = comment_match.group(1).strip() if comment_match else None
             line_cleaned = re.sub(r"\(\s*\*.*?\*\s*\)", "", line_content).strip()
@@ -136,34 +170,32 @@ class PanasonicFPDecompiler:
             mnemonic_token = parts[0].strip() if parts else ""
             inline_operands = parts[1].strip() if len(parts) > 1 else ""
 
-            # Recolectar operandos en líneas siguientes si vienen indentadas
-            operands = []
+            raw_operands = []
             if inline_operands:
-                operands.extend([op.strip() for op in re.split(r"[, ]+", inline_operands) if op.strip()])
+                raw_operands.extend([op.strip() for op in re.split(r"[, ]+", inline_operands) if op.strip()])
 
-            # Revisar siguientes líneas indentadas que corresponden a operandos
             j = i + 1
             while j < total_lines:
                 next_line = lines[j]
                 if next_line.startswith("	") or next_line.startswith("  "):
                     op_clean = re.sub(r"\(\s*\*.*?\*\s*\)", "", next_line).strip()
                     if op_clean and not op_clean.startswith("//"):
-                        operands.append(op_clean)
+                        raw_operands.append(op_clean)
                     j += 1
                 else:
                     break
 
-            i = j  # Avanzar al siguiente comando
+            i = j
 
-            # Resolver nemónico e información técnica
             resolved_token, inst_type, details = self._resolve_instruction_info(mnemonic_token)
+            tagged_operands = [self._tag_operand(op) for op in raw_operands]
 
             step_obj = {
                 "step": step_val,
                 "raw_mnemonic": mnemonic_token,
                 "resolved_mnemonic": resolved_token,
                 "inline_comment": inline_comment,
-                "operands": operands,
+                "operands": tagged_operands,
                 "type": inst_type,
                 "details": details
             }
@@ -181,20 +213,25 @@ class PanasonicFPDecompiler:
             "total_steps": step_counter,
             "main_flow_steps": parsed_steps,
             "subroutines": subroutines,
-            "subroutines_count": len(subroutines)
+            "subroutines_count": len(subroutines),
+            "symbols_loaded": len(self.symbol_table)
         }
 
 if __name__ == "__main__":
-    sample_path = "/mnt/c/Users/Usuario/Desktop/AcuamixPelambre Código de Programa.txt"
-    decompiler = PanasonicFPDecompiler()
+    code_path = "/mnt/c/Users/Usuario/Desktop/AcuamixPelambre Código de Programa.txt"
+    csv_path = "/mnt/c/Users/Usuario/Desktop/AcuamixPelambre.csv"
     
-    if os.path.exists(sample_path):
-        print(f"Analizando archivo real: {sample_path} ...")
-        result = decompiler.analyze_file(sample_path)
-        print(f"Total de instrucciones/pasos analizados: {result['total_steps']}")
-        print(f"Pasos en flujo principal: {len(result['main_flow_steps'])}")
-        print(f"Subrutinas encontradas: {list(result['subroutines'].keys())}")
+    decompiler = PanasonicFPDecompiler(symbols_csv_path=csv_path)
+    print(f"Símbolos cargados desde CSV: {len(decompiler.symbol_table)}")
+    
+    if os.path.exists(code_path):
+        result = decompiler.analyze_file(code_path)
+        print(f"Total de pasos analizados: {result['total_steps']}")
         
-        # Muestra de las primeras 3 instrucciones parseadas
-        print("\n--- Muestra de pasos estructurados ---")
-        print(json.dumps(result["main_flow_steps"][:3], indent=2, ensure_ascii=False))
+        # Muestra de instrucciones con variables tageadas
+        print("\n--- Muestra de pasos tageados con nombres de variables ---")
+        for step in result["main_flow_steps"][5:10]:
+            print(f"Paso {step['step']}: {step['resolved_mnemonic']} ({step['inline_comment'] or ''})")
+            for op in step['operands']:
+                tag = f" -> {op['tag']} ({op['dtype']})" if 'tag' in op else ""
+                print(f"    {op['raw']}{tag}")
