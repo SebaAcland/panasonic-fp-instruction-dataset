@@ -218,20 +218,67 @@ class PanasonicFPDecompiler:
         }
 
 if __name__ == "__main__":
-    code_path = "/mnt/c/Users/Usuario/Desktop/AcuamixPelambre Código de Programa.txt"
-    csv_path = "/mnt/c/Users/Usuario/Desktop/AcuamixPelambre.csv"
-    
-    decompiler = PanasonicFPDecompiler(symbols_csv_path=csv_path)
-    print(f"Símbolos cargados desde CSV: {len(decompiler.symbol_table)}")
-    
-    if os.path.exists(code_path):
-        result = decompiler.analyze_file(code_path)
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Descompilador y Analizador de Nemónicos / IL de Panasonic FP Series"
+    )
+    parser.add_argument(
+        "code_file",
+        nargs="?",
+        default="/mnt/c/Users/Usuario/Desktop/AcuamixPelambre Código de Programa.txt",
+        help="Ruta al archivo de código nemónico exportado (.txt)"
+    )
+    parser.add_argument(
+        "--symbols-csv", "-s",
+        default=None,
+        help="Ruta opcional al archivo CSV de variables exportado desde FPWIN Pro"
+    )
+    parser.add_argument(
+        "--output", "-o",
+        default=None,
+        help="Ruta opcional para guardar el resultado estructurado en formato JSON"
+    )
+
+    args = parser.parse_args()
+
+    # Si no se pasó CSV por flag, chequear si existe el CSV con el mismo nombre en la misma carpeta
+    symbols_csv = args.symbols_csv
+    if symbols_csv is None and args.code_file:
+        auto_csv = os.path.splitext(args.code_file)[0] + ".csv"
+        # También chequear nombre base sin " Código de Programa"
+        clean_base = re.sub(r"\s+Código\s+de\s+Programa$", "", os.path.splitext(args.code_file)[0], flags=re.IGNORECASE)
+        alt_csv = clean_base + ".csv"
+        if os.path.exists(auto_csv):
+            symbols_csv = auto_csv
+        elif os.path.exists(alt_csv):
+            symbols_csv = alt_csv
+
+    decompiler = PanasonicFPDecompiler(symbols_csv_path=symbols_csv)
+    if symbols_csv and os.path.exists(symbols_csv):
+        print(f"Símbolos cargados desde: {symbols_csv} ({len(decompiler.symbol_table)} variables)")
+    else:
+        print("Modo: Análisis de direcciones físicas puras (sin CSV de símbolos)")
+
+    if os.path.exists(args.code_file):
+        print(f"Analizando archivo de código: {args.code_file} ...")
+        result = decompiler.analyze_file(args.code_file)
         print(f"Total de pasos analizados: {result['total_steps']}")
-        
-        # Muestra de instrucciones con variables tageadas
-        print("\n--- Muestra de pasos tageados con nombres de variables ---")
-        for step in result["main_flow_steps"][5:10]:
-            print(f"Paso {step['step']}: {step['resolved_mnemonic']} ({step['inline_comment'] or ''})")
-            for op in step['operands']:
-                tag = f" -> {op['tag']} ({op['dtype']})" if 'tag' in op else ""
-                print(f"    {op['raw']}{tag}")
+        print(f"Pasos en flujo principal: {len(result['main_flow_steps'])}")
+        print(f"Subrutinas encontradas: {list(result['subroutines'].keys())}")
+
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f_out:
+                json.dump(result, f_out, indent=2, ensure_ascii=False)
+            print(f"Resultado guardado en: {args.output}")
+        else:
+            # Muestra en consola
+            print("\n--- Muestra de primeros 6 pasos tageados ---")
+            for step in result["main_flow_steps"][:6]:
+                comment = f" ({step['inline_comment']})" if step['inline_comment'] else ""
+                print(f"Paso {step['step']}: {step['resolved_mnemonic']}{comment}")
+                for op in step['operands']:
+                    tag = f" -> {op['tag']} ({op['dtype']})" if 'tag' in op else ""
+                    print(f"    {op['raw']}{tag}")
+    else:
+        print(f"Error: El archivo de código no existe: {args.code_file}")
