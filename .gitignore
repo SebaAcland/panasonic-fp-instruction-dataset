@@ -1,0 +1,5 @@
+# Ignorar PDFs pesados pero mantener la carpeta docs/
+docs/*.pdf
+__pycache__/
+*.pyc
+.venv/
