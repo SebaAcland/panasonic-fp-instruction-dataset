@@ -1,0 +1,213 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Panasonic FP Series Instruction Set & IL Grammar",
+  "description": "Base de conocimiento estructurada de instrucciones nativas Panasonic FP (FP0, FP0R, FP0H, FP-X) y mnemónicos de FPWIN Pro / FPWIN GR para interpretación por IA.",
+  "version": "1.0.0",
+  "memory_areas": {
+    "X": {"description": "Entrada digital física (Bit)", "unit": "Bit/Word (WX)", "read_only": true},
+    "Y": {"description": "Salida digital física (Bit)", "unit": "Bit/Word (WY)", "read_only": false},
+    "R": {"description": "Relé interno / Bandera de memoria (Bit)", "unit": "Bit/Word (WR)", "read_only": false},
+    "T": {"description": "Temporizador (Bit de contacto T / Valor actual TS)", "read_only": false},
+    "C": {"description": "Contador (Bit de contacto C / Valor actual CS)", "read_only": false},
+    "DT": {"description": "Registro de datos de 16 bits (Data Register)", "unit": "Word/DWord (DDT)", "read_only": false},
+    "FL": {"description": "Registro de archivo (Flash ROM / File Register)", "unit": "Word", "read_only": false},
+    "K": {"description": "Constante numérica decimal (ej: K10, K-50)", "type": "constant"},
+    "H": {"description": "Constante numérica hexadecimal (ej: H1A, HFFFF)", "type": "constant"}
+  },
+  "instructions": [
+    {
+      "code": "ST",
+      "name": "Store / Load",
+      "category": "Basic Logic",
+      "syntax": "ST <operand>",
+      "operands": ["X", "Y", "R", "T", "C"],
+      "description": "Inicia un nuevo renglón o bloque lógico con un contacto Normalmente Abierto (NO).",
+      "iec_equivalent": "LD"
+    },
+    {
+      "code": "ST/",
+      "name": "Store Not / Load Not",
+      "category": "Basic Logic",
+      "syntax": "ST/ <operand>",
+      "operands": ["X", "Y", "R", "T", "C"],
+      "description": "Inicia un nuevo renglón o bloque lógico con un contacto Normalmente Cerrado (NC).",
+      "iec_equivalent": "LDN"
+    },
+    {
+      "code": "AN",
+      "name": "And",
+      "category": "Basic Logic",
+      "syntax": "AN <operand>",
+      "operands": ["X", "Y", "R", "T", "C"],
+      "description": "Conecta en serie un contacto Normalmente Abierto (NO).",
+      "iec_equivalent": "AND"
+    },
+    {
+      "code": "AN/",
+      "name": "And Not",
+      "category": "Basic Logic",
+      "syntax": "AN/ <operand>",
+      "operands": ["X", "Y", "R", "T", "C"],
+      "description": "Conecta en serie un contacto Normalmente Cerrado (NC).",
+      "iec_equivalent": "ANDN"
+    },
+    {
+      "code": "OR",
+      "name": "Or",
+      "category": "Basic Logic",
+      "syntax": "OR <operand>",
+      "operands": ["X", "Y", "R", "T", "C"],
+      "description": "Conecta en paralelo un contacto Normalmente Abierto (NO).",
+      "iec_equivalent": "OR"
+    },
+    {
+      "code": "OR/",
+      "name": "Or Not",
+      "category": "Basic Logic",
+      "syntax": "OR/ <operand>",
+      "operands": ["X", "Y", "R", "T", "C"],
+      "description": "Conecta en paralelo un contacto Normalmente Cerrado (NC).",
+      "iec_equivalent": "ORN"
+    },
+    {
+      "code": "ANS",
+      "name": "And Stack",
+      "category": "Branch / Stack",
+      "syntax": "ANS",
+      "operands": [],
+      "description": "Conecta en serie bloques lógicos independientes generados con ST.",
+      "iec_equivalent": "AND ("
+    },
+    {
+      "code": "ORS",
+      "name": "Or Stack",
+      "category": "Branch / Stack",
+      "syntax": "ORS",
+      "operands": [],
+      "description": "Conecta en paralelo bloques lógicos independientes generados con ST.",
+      "iec_equivalent": "OR ("
+    },
+    {
+      "code": "OT",
+      "name": "Output",
+      "category": "Basic Logic Output",
+      "syntax": "OT <operand>",
+      "operands": ["Y", "R"],
+      "description": "Asigna el resultado de la operación lógica a una bobina de salida física o relé interno.",
+      "iec_equivalent": "ST"
+    },
+    {
+      "code": "SET",
+      "name": "Set Output",
+      "category": "Latch / Unlatch",
+      "syntax": "SET <operand>",
+      "operands": ["Y", "R"],
+      "description": "Enclava la bobina en estado ON (permanece ON aunque la condición pase a OFF).",
+      "iec_equivalent": "S"
+    },
+    {
+      "code": "RST",
+      "name": "Reset Output",
+      "category": "Latch / Unlatch",
+      "syntax": "RST <operand>",
+      "operands": ["Y", "R", "T", "C"],
+      "description": "Desenclava o apaga la bobina/temporizador/contador (pasa a estado OFF).",
+      "iec_equivalent": "R"
+    },
+    {
+      "code": "KP",
+      "name": "Keep (Set/Reset combined)",
+      "category": "Latch / Unlatch",
+      "syntax": "KP <operand>",
+      "operands": ["Y", "R"],
+      "description": "Instrucción Keep con dos líneas de entrada (primer ST para Set, segundo ST para Reset)."
+    },
+    {
+      "code": "TM",
+      "name": "Timer (100ms)",
+      "category": "Timers & Counters",
+      "syntax": "TM <timer_no> <preset_value_K_or_DT>",
+      "operands": ["T", "K", "DT"],
+      "description": "Temporizador con base de tiempo estándar de 100 ms."
+    },
+    {
+      "code": "TMR",
+      "name": "High-Speed Timer (10ms / 1ms)",
+      "category": "Timers & Counters",
+      "syntax": "TMR <timer_no> <preset_value_K_or_DT>",
+      "operands": ["T", "K", "DT"],
+      "description": "Temporizador de alta velocidad (base de 10 ms o 1 ms según modelo/parámetro)."
+    },
+    {
+      "code": "CT",
+      "name": "Counter",
+      "category": "Timers & Counters",
+      "syntax": "CT <counter_no> <preset_value_K_or_DT>",
+      "operands": ["C", "K", "DT"],
+      "description": "Contador incremental decremental de pulsos."
+    },
+    {
+      "code": "CALL",
+      "name": "Call Subroutine",
+      "category": "Program Control",
+      "syntax": "CALL <subroutine_number_P>",
+      "operands": ["P"],
+      "description": "Llama a una subrutina identificada por la etiqueta de puntero P (ej: CALL P0). Se reanuda tras encontrar RET.",
+      "iec_equivalent": "CAL"
+    },
+    {
+      "code": "RET",
+      "name": "Return from Subroutine",
+      "category": "Program Control",
+      "syntax": "RET",
+      "operands": [],
+      "description": "Finaliza una subrutina y devuelve el flujo de ejecución a la instrucción posterior al CALL.",
+      "iec_equivalent": "RET"
+    },
+    {
+      "code": "F0",
+      "symbolic_name": "MV",
+      "name": "Move 16-bit",
+      "category": "Data Transfer",
+      "syntax": "F0 (MV), <source>, <dest>",
+      "operands": ["DT", "WX", "WY", "WR", "K", "H"],
+      "description": "Transfiere una palabra de 16 bits desde el origen (S) al destino (D)."
+    },
+    {
+      "code": "F1",
+      "symbolic_name": "DMV",
+      "name": "Double Move 32-bit",
+      "category": "Data Transfer",
+      "syntax": "F1 (DMV), <source>, <dest>",
+      "operands": ["DT", "K", "H"],
+      "description": "Transfiere un valor de 32 bits (2 palabras consecutivas) desde origen a destino."
+    },
+    {
+      "code": "F22",
+      "symbolic_name": "ADD",
+      "name": "Addition 16-bit",
+      "category": "Arithmetic",
+      "syntax": "F22 (ADD), <S1>, <S2>, <D>",
+      "operands": ["DT", "K", "H"],
+      "description": "Suma dos valores de 16 bits: S1 + S2 -> D."
+    },
+    {
+      "code": "F23",
+      "symbolic_name": "SUB",
+      "name": "Subtraction 16-bit",
+      "category": "Arithmetic",
+      "syntax": "F23 (SUB), <S1>, <S2>, <D>",
+      "operands": ["DT", "K", "H"],
+      "description": "Resta dos valores de 16 bits: S1 - S2 -> D."
+    },
+    {
+      "code": "F60",
+      "symbolic_name": "CMP",
+      "name": "Compare 16-bit",
+      "category": "Comparison",
+      "syntax": "F60 (CMP), <S1>, <S2>",
+      "operands": ["DT", "K", "H", "WX", "WR"],
+      "description": "Compara S1 con S2 y actualiza los relés especiales de estado (R901A: >, R901B: =, R901C: <)."
+    }
+  ]
+}
