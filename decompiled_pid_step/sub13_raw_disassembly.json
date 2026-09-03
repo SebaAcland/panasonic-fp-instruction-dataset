@@ -1,0 +1,4100 @@
+[
+  {
+    "step": 1157,
+    "raw_mnemonic": "SUB",
+    "resolved_mnemonic": "SUB",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "13"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "SUB",
+      "type": "basic",
+      "description": "Subroutine definition",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.6-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1158,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1159,
+    "raw_mnemonic": "F11",
+    "resolved_mnemonic": "F11",
+    "inline_comment": "COPY",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3390"
+      },
+      {
+        "raw": "DT3442"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F11",
+      "symbolic_mnemonic": "COPY",
+      "operands_syntax": "S, D1, D2",
+      "name": "16-bit data block copy",
+      "steps": "7",
+      "category": "Transfer instructions",
+      "manual_ref": "\"P. 10-27\"",
+      "full_syntax": "F11 (COPY) S, D1, D2"
+    }
+  },
+  {
+    "step": 1160,
+    "raw_mnemonic": "F65",
+    "resolved_mnemonic": "F65",
+    "inline_comment": "WAN",
+    "operands": [
+      {
+        "raw": "HE03F"
+      },
+      {
+        "raw": "WR58"
+      },
+      {
+        "raw": "WR58"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F65",
+      "symbolic_mnemonic": "WAN",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data AND",
+      "steps": "7",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 14-2\"",
+      "full_syntax": "F65 (WAN) S1, S2, D"
+    }
+  },
+  {
+    "step": 1161,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1162,
+    "raw_mnemonic": "F325",
+    "resolved_mnemonic": "F325",
+    "inline_comment": "FLT",
+    "operands": [
+      {
+        "raw": "DT3357"
+      },
+      {
+        "raw": "DT3430"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F325",
+      "symbolic_mnemonic": "FLT",
+      "operands_syntax": "S, D",
+      "name": "16-bit integer to floating point data conversion",
+      "steps": "6",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-35\"",
+      "full_syntax": "F325 (FLT) S, D"
+    }
+  },
+  {
+    "step": 1163,
+    "raw_mnemonic": "F325",
+    "resolved_mnemonic": "F325",
+    "inline_comment": "FLT",
+    "operands": [
+      {
+        "raw": "DT3356"
+      },
+      {
+        "raw": "DT3432"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F325",
+      "symbolic_mnemonic": "FLT",
+      "operands_syntax": "S, D",
+      "name": "16-bit integer to floating point data conversion",
+      "steps": "6",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-35\"",
+      "full_syntax": "F325 (FLT) S, D"
+    }
+  },
+  {
+    "step": 1164,
+    "raw_mnemonic": "F325",
+    "resolved_mnemonic": "F325",
+    "inline_comment": "FLT",
+    "operands": [
+      {
+        "raw": "DT3368"
+      },
+      {
+        "raw": "DT3434"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F325",
+      "symbolic_mnemonic": "FLT",
+      "operands_syntax": "S, D",
+      "name": "16-bit integer to floating point data conversion",
+      "steps": "6",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-35\"",
+      "full_syntax": "F325 (FLT) S, D"
+    }
+  },
+  {
+    "step": 1165,
+    "raw_mnemonic": "F325",
+    "resolved_mnemonic": "F325",
+    "inline_comment": "FLT",
+    "operands": [
+      {
+        "raw": "DT3367"
+      },
+      {
+        "raw": "DT3436"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F325",
+      "symbolic_mnemonic": "FLT",
+      "operands_syntax": "S, D",
+      "name": "16-bit integer to floating point data conversion",
+      "steps": "6",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-35\"",
+      "full_syntax": "F325 (FLT) S, D"
+    }
+  },
+  {
+    "step": 1166,
+    "raw_mnemonic": "F133",
+    "resolved_mnemonic": "F133",
+    "inline_comment": "BTT",
+    "operands": [
+      {
+        "raw": "DT3373"
+      },
+      {
+        "raw": "K0"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F133",
+      "symbolic_mnemonic": "BTT",
+      "operands_syntax": "S, n",
+      "name": "Specified bit test",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 19-8\"",
+      "full_syntax": "F133 (BTT) S, n"
+    }
+  },
+  {
+    "step": 1167,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R900B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1168,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1169,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1170,
+    "raw_mnemonic": "F133",
+    "resolved_mnemonic": "F133",
+    "inline_comment": "BTT",
+    "operands": [
+      {
+        "raw": "DT3373"
+      },
+      {
+        "raw": "K1"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F133",
+      "symbolic_mnemonic": "BTT",
+      "operands_syntax": "S, n",
+      "name": "Specified bit test",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 19-8\"",
+      "full_syntax": "F133 (BTT) S, n"
+    }
+  },
+  {
+    "step": 1171,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R900B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1172,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58A"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1173,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1174,
+    "raw_mnemonic": "F39",
+    "resolved_mnemonic": "F39",
+    "inline_comment": "DMULD",
+    "operands": [
+      {
+        "raw": "DT3360"
+      },
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3417"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F39",
+      "symbolic_mnemonic": "D*D",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1 \u00d7 S2 = D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-38\"",
+      "full_syntax": "F39 (D*D) S1, S2, D"
+    }
+  },
+  {
+    "step": 1175,
+    "raw_mnemonic": "F39",
+    "resolved_mnemonic": "F39",
+    "inline_comment": "DMULD",
+    "operands": [
+      {
+        "raw": "DT3362"
+      },
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3419"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F39",
+      "symbolic_mnemonic": "D*D",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1 \u00d7 S2 = D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-38\"",
+      "full_syntax": "F39 (D*D) S1, S2, D"
+    }
+  },
+  {
+    "step": 1176,
+    "raw_mnemonic": "F39",
+    "resolved_mnemonic": "F39",
+    "inline_comment": "DMULD",
+    "operands": [
+      {
+        "raw": "DT3364"
+      },
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3421"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F39",
+      "symbolic_mnemonic": "D*D",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1 \u00d7 S2 = D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-38\"",
+      "full_syntax": "F39 (D*D) S1, S2, D"
+    }
+  },
+  {
+    "step": 1177,
+    "raw_mnemonic": "STD_GT",
+    "resolved_mnemonic": "STD>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "K1"
+      },
+      {
+        "raw": "DT3421"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "STD>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1178,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K1"
+      },
+      {
+        "raw": "DT3421"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1179,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1180,
+    "raw_mnemonic": "F39",
+    "resolved_mnemonic": "F39",
+    "inline_comment": "DMULD",
+    "operands": [
+      {
+        "raw": "DT3371"
+      },
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3425"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F39",
+      "symbolic_mnemonic": "D*D",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1 \u00d7 S2 = D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-38\"",
+      "full_syntax": "F39 (D*D) S1, S2, D"
+    }
+  },
+  {
+    "step": 1181,
+    "raw_mnemonic": "STD_GT",
+    "resolved_mnemonic": "STD>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3425"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "STD>",
+      "type": "basic",
+      "description": "Begins a logical operation to compare 32-bit data",
+      "steps": "9",
+      "manual_ref": "\"P.9-8\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1182,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3425"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1183,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1184,
+    "raw_mnemonic": "F326",
+    "resolved_mnemonic": "F326",
+    "inline_comment": "DFLT",
+    "operands": [
+      {
+        "raw": "DT3417"
+      },
+      {
+        "raw": "DT3393"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F326",
+      "symbolic_mnemonic": "DFLT",
+      "operands_syntax": "S, D",
+      "name": "32-bit integer to floating point data conversion",
+      "steps": "8",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-36\"",
+      "full_syntax": "F326 (DFLT) S, D"
+    }
+  },
+  {
+    "step": 1185,
+    "raw_mnemonic": "F326",
+    "resolved_mnemonic": "F326",
+    "inline_comment": "DFLT",
+    "operands": [
+      {
+        "raw": "DT3419"
+      },
+      {
+        "raw": "DT3395"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F326",
+      "symbolic_mnemonic": "DFLT",
+      "operands_syntax": "S, D",
+      "name": "32-bit integer to floating point data conversion",
+      "steps": "8",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-36\"",
+      "full_syntax": "F326 (DFLT) S, D"
+    }
+  },
+  {
+    "step": 1186,
+    "raw_mnemonic": "F39",
+    "resolved_mnemonic": "F39",
+    "inline_comment": "DMULD",
+    "operands": [
+      {
+        "raw": "DT3369"
+      },
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3427"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F39",
+      "symbolic_mnemonic": "D*D",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data multiplication [S1 \u00d7 S2 = D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-38\"",
+      "full_syntax": "F39 (D*D) S1, S2, D"
+    }
+  },
+  {
+    "step": 1187,
+    "raw_mnemonic": "F326",
+    "resolved_mnemonic": "F326",
+    "inline_comment": "DFLT",
+    "operands": [
+      {
+        "raw": "DT3427"
+      },
+      {
+        "raw": "DT3413"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F326",
+      "symbolic_mnemonic": "DFLT",
+      "operands_syntax": "S, D",
+      "name": "32-bit integer to floating point data conversion",
+      "steps": "8",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-36\"",
+      "full_syntax": "F326 (DFLT) S, D"
+    }
+  },
+  {
+    "step": 1188,
+    "raw_mnemonic": "F311",
+    "resolved_mnemonic": "F311",
+    "inline_comment": "FSUB",
+    "operands": [
+      {
+        "raw": "DT3430"
+      },
+      {
+        "raw": "DT3432"
+      },
+      {
+        "raw": "DT3397"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1189,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R582"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1190,
+    "raw_mnemonic": "F311",
+    "resolved_mnemonic": "F311",
+    "inline_comment": "FSUB",
+    "operands": [
+      {
+        "raw": "DT3432"
+      },
+      {
+        "raw": "DT3430"
+      },
+      {
+        "raw": "DT3397"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1191,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1192,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "DT90019"
+      },
+      {
+        "raw": "DT3429"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1193,
+    "raw_mnemonic": "F27",
+    "resolved_mnemonic": "F27",
+    "inline_comment": "SUB2",
+    "operands": [
+      {
+        "raw": "DT3429"
+      },
+      {
+        "raw": "DT3389"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F27",
+      "symbolic_mnemonic": "-",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data subtraction [S1-S2=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-15\"",
+      "full_syntax": "F27 (-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1194,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3415"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1195,
+    "raw_mnemonic": "F89",
+    "resolved_mnemonic": "F89",
+    "inline_comment": "EXT",
+    "operands": [
+      {
+        "raw": "DT3415"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F89",
+      "symbolic_mnemonic": "EXT",
+      "operands_syntax": "D",
+      "name": "Sign extension",
+      "steps": "3",
+      "category": "Data conversion instructions",
+      "manual_ref": "\"P. 15-48\"",
+      "full_syntax": "F89 (EXT) D"
+    }
+  },
+  {
+    "step": 1196,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "DT3429"
+      },
+      {
+        "raw": "DT3389"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1197,
+    "raw_mnemonic": "F21",
+    "resolved_mnemonic": "F21",
+    "inline_comment": "DADD",
+    "operands": [
+      {
+        "raw": "DT3415"
+      },
+      {
+        "raw": "DT3374"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F21",
+      "symbolic_mnemonic": "D+",
+      "operands_syntax": "S, D",
+      "name": "32-bit data addition [D+S=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-4\"",
+      "full_syntax": "F21 (D+) S, D"
+    }
+  },
+  {
+    "step": 1198,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R582"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1199,
+    "raw_mnemonic": "AN/",
+    "resolved_mnemonic": "AN/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58A"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1200,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R582"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1201,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58A"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1202,
+    "raw_mnemonic": "ORS",
+    "resolved_mnemonic": "ORS",
+    "inline_comment": null,
+    "operands": [],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ORS",
+      "type": "basic",
+      "description": "Connects multiple instruction blocks in parallel",
+      "steps": "1",
+      "manual_ref": "\"P.2-27\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1203,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R589"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1204,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1205,
+    "raw_mnemonic": "OR",
+    "resolved_mnemonic": "OR",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R589"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OR",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact in parallel",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-16\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1206,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R588"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1207,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R582"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1208,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58A"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1209,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R588"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1210,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3397"
+      },
+      {
+        "raw": "DT3378"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1211,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3380"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1212,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3432"
+      },
+      {
+        "raw": "DT3376"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1213,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "DT3429"
+      },
+      {
+        "raw": "DT3389"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1214,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3388"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1215,
+    "raw_mnemonic": "SET",
+    "resolved_mnemonic": "SET",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "SET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1216,
+    "raw_mnemonic": "SET",
+    "resolved_mnemonic": "SET",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R588"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "SET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1217,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1218,
+    "raw_mnemonic": "F311",
+    "resolved_mnemonic": "F311",
+    "inline_comment": "FSUB",
+    "operands": [
+      {
+        "raw": "DT3376"
+      },
+      {
+        "raw": "DT3432"
+      },
+      {
+        "raw": "DT3407"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1219,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R582"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1220,
+    "raw_mnemonic": "F132",
+    "resolved_mnemonic": "F132",
+    "inline_comment": "BTI",
+    "operands": [
+      {
+        "raw": "DT3408"
+      },
+      {
+        "raw": "K15"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F132",
+      "symbolic_mnemonic": "BTI",
+      "operands_syntax": "D, n",
+      "name": "Specified bit inversion",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 19-6\"",
+      "full_syntax": "F132 (BTI) D, n"
+    }
+  },
+  {
+    "step": 1221,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1222,
+    "raw_mnemonic": "F311",
+    "resolved_mnemonic": "F311",
+    "inline_comment": "FSUB",
+    "operands": [
+      {
+        "raw": "DT3397"
+      },
+      {
+        "raw": "DT3378"
+      },
+      {
+        "raw": "DT3409"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1223,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R583"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1224,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3407"
+      },
+      {
+        "raw": "DT3409"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1225,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1226,
+    "raw_mnemonic": "F27",
+    "resolved_mnemonic": "F27",
+    "inline_comment": "SUB2",
+    "operands": [
+      {
+        "raw": "DT3366"
+      },
+      {
+        "raw": "DT3388"
+      },
+      {
+        "raw": "DT3442"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F27",
+      "symbolic_mnemonic": "-",
+      "operands_syntax": "S1, S2, D",
+      "name": "16-bit data subtraction [S1-S2=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-15\"",
+      "full_syntax": "F27 (-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1227,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R581"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1228,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1229,
+    "raw_mnemonic": "AND_GE",
+    "resolved_mnemonic": "AND>=",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3374"
+      },
+      {
+        "raw": "DT3421"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AND>=",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1230,
+    "raw_mnemonic": "F326",
+    "resolved_mnemonic": "F326",
+    "inline_comment": "DFLT",
+    "operands": [
+      {
+        "raw": "DT3374"
+      },
+      {
+        "raw": "DT3411"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F326",
+      "symbolic_mnemonic": "DFLT",
+      "operands_syntax": "S, D",
+      "name": "32-bit integer to floating point data conversion",
+      "steps": "8",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-36\"",
+      "full_syntax": "F326 (DFLT) S, D"
+    }
+  },
+  {
+    "step": 1231,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3374"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1232,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R54B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1233,
+    "raw_mnemonic": "SET",
+    "resolved_mnemonic": "SET",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R588"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "SET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1234,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3403"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1235,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1236,
+    "raw_mnemonic": "AND_NE",
+    "resolved_mnemonic": "AND<>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3393"
+      },
+      {
+        "raw": "K0"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AND<>",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1237,
+    "raw_mnemonic": "F312",
+    "resolved_mnemonic": "F312",
+    "inline_comment": "FMUL",
+    "operands": [
+      {
+        "raw": "DT3397"
+      },
+      {
+        "raw": "DT3411"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    }
+  },
+  {
+    "step": 1238,
+    "raw_mnemonic": "F313",
+    "resolved_mnemonic": "F313",
+    "inline_comment": "FDIV",
+    "operands": [
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3393"
+      },
+      {
+        "raw": "DT3403"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F313",
+      "symbolic_mnemonic": "F%",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data division",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-11\"",
+      "full_syntax": "F313 (F%) S1, S2, D"
+    }
+  },
+  {
+    "step": 1239,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1240,
+    "raw_mnemonic": "F313",
+    "resolved_mnemonic": "F313",
+    "inline_comment": "FDIV",
+    "operands": [
+      {
+        "raw": "DT3395"
+      },
+      {
+        "raw": "SF4.0"
+      },
+      {
+        "raw": "DT3440"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F313",
+      "symbolic_mnemonic": "F%",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data division",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-11\"",
+      "full_syntax": "F313 (F%) S1, S2, D"
+    }
+  },
+  {
+    "step": 1241,
+    "raw_mnemonic": "F312",
+    "resolved_mnemonic": "F312",
+    "inline_comment": "FMUL",
+    "operands": [
+      {
+        "raw": "DT3358"
+      },
+      {
+        "raw": "DT3395"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    }
+  },
+  {
+    "step": 1242,
+    "raw_mnemonic": "F312",
+    "resolved_mnemonic": "F312",
+    "inline_comment": "FMUL",
+    "operands": [
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3407"
+      },
+      {
+        "raw": "DT3471"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    }
+  },
+  {
+    "step": 1243,
+    "raw_mnemonic": "F312",
+    "resolved_mnemonic": "F312",
+    "inline_comment": "FMUL",
+    "operands": [
+      {
+        "raw": "DT3411"
+      },
+      {
+        "raw": "DT3380"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    }
+  },
+  {
+    "step": 1244,
+    "raw_mnemonic": "F311",
+    "resolved_mnemonic": "F311",
+    "inline_comment": "FSUB",
+    "operands": [
+      {
+        "raw": "DT3471"
+      },
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3473"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1245,
+    "raw_mnemonic": "F310",
+    "resolved_mnemonic": "F310",
+    "inline_comment": "FADD",
+    "operands": [
+      {
+        "raw": "DT3411"
+      },
+      {
+        "raw": "DT3440"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F310",
+      "symbolic_mnemonic": "F+",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data addition",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-5\"",
+      "full_syntax": "F310 (F+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1246,
+    "raw_mnemonic": "F313",
+    "resolved_mnemonic": "F313",
+    "inline_comment": "FDIV",
+    "operands": [
+      {
+        "raw": "DT3473"
+      },
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3401"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F313",
+      "symbolic_mnemonic": "F%",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data division",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-11\"",
+      "full_syntax": "F313 (F%) S1, S2, D"
+    }
+  },
+  {
+    "step": 1247,
+    "raw_mnemonic": "F310",
+    "resolved_mnemonic": "F310",
+    "inline_comment": "FADD",
+    "operands": [
+      {
+        "raw": "DT3409"
+      },
+      {
+        "raw": "DT3403"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F310",
+      "symbolic_mnemonic": "F+",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data addition",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-5\"",
+      "full_syntax": "F310 (F+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1248,
+    "raw_mnemonic": "F312",
+    "resolved_mnemonic": "F312",
+    "inline_comment": "FMUL",
+    "operands": [
+      {
+        "raw": "DT3358"
+      },
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3471"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    }
+  },
+  {
+    "step": 1249,
+    "raw_mnemonic": "F310",
+    "resolved_mnemonic": "F310",
+    "inline_comment": "FADD",
+    "operands": [
+      {
+        "raw": "DT3471"
+      },
+      {
+        "raw": "DT3401"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F310",
+      "symbolic_mnemonic": "F+",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data addition",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-5\"",
+      "full_syntax": "F310 (F+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1250,
+    "raw_mnemonic": "F325",
+    "resolved_mnemonic": "F325",
+    "inline_comment": "FLT",
+    "operands": [
+      {
+        "raw": "DT3442"
+      },
+      {
+        "raw": "DT3471"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F325",
+      "symbolic_mnemonic": "FLT",
+      "operands_syntax": "S, D",
+      "name": "16-bit integer to floating point data conversion",
+      "steps": "6",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-35\"",
+      "full_syntax": "F325 (FLT) S, D"
+    }
+  },
+  {
+    "step": 1251,
+    "raw_mnemonic": "F310",
+    "resolved_mnemonic": "F310",
+    "inline_comment": "FADD",
+    "operands": [
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3471"
+      },
+      {
+        "raw": "DT3405"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F310",
+      "symbolic_mnemonic": "F+",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data addition",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-5\"",
+      "full_syntax": "F310 (F+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1252,
+    "raw_mnemonic": "ANF_GT",
+    "resolved_mnemonic": "ANF>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3405"
+      },
+      {
+        "raw": "SF0.0"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ANF>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1253,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R508"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1254,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1255,
+    "raw_mnemonic": "ANF_GT",
+    "resolved_mnemonic": "ANF>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3382"
+      },
+      {
+        "raw": "SF0.0"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ANF>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1256,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R509"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1257,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R508"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1258,
+    "raw_mnemonic": "AN/",
+    "resolved_mnemonic": "AN/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R509"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1259,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R508"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1260,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R509"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1261,
+    "raw_mnemonic": "ORS",
+    "resolved_mnemonic": "ORS",
+    "inline_comment": null,
+    "operands": [],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ORS",
+      "type": "basic",
+      "description": "Connects multiple instruction blocks in parallel",
+      "steps": "1",
+      "manual_ref": "\"P.2-27\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1262,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R54B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1263,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1264,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R54B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1265,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1266,
+    "raw_mnemonic": "KP",
+    "resolved_mnemonic": "KP",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58C"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "KP",
+      "type": "basic",
+      "description": "Outputs with set and reset inputs",
+      "steps": "1",
+      "manual_ref": "\"P.2-47\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1267,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1268,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58C"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1269,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3386"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1270,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1271,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3405"
+      },
+      {
+        "raw": "DT3382"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1272,
+    "raw_mnemonic": "F311",
+    "resolved_mnemonic": "F311",
+    "inline_comment": "FSUB",
+    "operands": [
+      {
+        "raw": "DT3436"
+      },
+      {
+        "raw": "DT3434"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F311",
+      "symbolic_mnemonic": "F-",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data subtraction",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-7\"",
+      "full_syntax": "F311 (F-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1273,
+    "raw_mnemonic": "F313",
+    "resolved_mnemonic": "F313",
+    "inline_comment": "FDIV",
+    "operands": [
+      {
+        "raw": "DT3405"
+      },
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3471"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F313",
+      "symbolic_mnemonic": "F%",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data division",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-11\"",
+      "full_syntax": "F313 (F%) S1, S2, D"
+    }
+  },
+  {
+    "step": 1274,
+    "raw_mnemonic": "F336",
+    "resolved_mnemonic": "F336",
+    "inline_comment": "FABS",
+    "operands": [
+      {
+        "raw": "DT3471"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F336",
+      "symbolic_mnemonic": "FABS",
+      "operands_syntax": "S, D",
+      "name": "Floating point data absolute value conversion",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-56\"",
+      "full_syntax": "F336 (FABS) S, D"
+    }
+  },
+  {
+    "step": 1275,
+    "raw_mnemonic": "F312",
+    "resolved_mnemonic": "F312",
+    "inline_comment": "FMUL",
+    "operands": [
+      {
+        "raw": "DT3413"
+      },
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3471"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F312",
+      "symbolic_mnemonic": "F*",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data multiplication",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-9\"",
+      "full_syntax": "F312 (F*) S1, S2, D"
+    }
+  },
+  {
+    "step": 1276,
+    "raw_mnemonic": "F332",
+    "resolved_mnemonic": "F332",
+    "inline_comment": "DROFF",
+    "operands": [
+      {
+        "raw": "DT3471"
+      },
+      {
+        "raw": "DT3423"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F332",
+      "symbolic_mnemonic": "DROFF",
+      "operands_syntax": "S, D",
+      "name": "Convert floating point data to rounded 32-bit integer",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-48\"",
+      "full_syntax": "F332 (DROFF) S, D"
+    }
+  },
+  {
+    "step": 1277,
+    "raw_mnemonic": "F23",
+    "resolved_mnemonic": "F23",
+    "inline_comment": "DADD2",
+    "operands": [
+      {
+        "raw": "DT3386"
+      },
+      {
+        "raw": "DT3423"
+      },
+      {
+        "raw": "DT3384"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F23",
+      "symbolic_mnemonic": "D+",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data addition [S1+S2=D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-8\"",
+      "full_syntax": "F23 (D+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1278,
+    "raw_mnemonic": "F28",
+    "resolved_mnemonic": "F28",
+    "inline_comment": "DSUB2",
+    "operands": [
+      {
+        "raw": "DT3421"
+      },
+      {
+        "raw": "DT3425"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F28",
+      "symbolic_mnemonic": "D-",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data subtraction [S1-S2=D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-18\"",
+      "full_syntax": "F28 (D-) S1, S2, D"
+    }
+  },
+  {
+    "step": 1279,
+    "raw_mnemonic": "AND_GE",
+    "resolved_mnemonic": "AND>=",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3384"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AND>=",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1280,
+    "raw_mnemonic": "F23",
+    "resolved_mnemonic": "F23",
+    "inline_comment": "DADD2",
+    "operands": [
+      {
+        "raw": "DT3421"
+      },
+      {
+        "raw": "DT3425"
+      },
+      {
+        "raw": "DT3384"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F23",
+      "symbolic_mnemonic": "D+",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data addition [S1+S2=D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-8\"",
+      "full_syntax": "F23 (D+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1281,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1282,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3384"
+      },
+      {
+        "raw": "DT3386"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1283,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1284,
+    "raw_mnemonic": "F310",
+    "resolved_mnemonic": "F310",
+    "inline_comment": "FADD",
+    "operands": [
+      {
+        "raw": "DT3380"
+      },
+      {
+        "raw": "DT3401"
+      },
+      {
+        "raw": "DT3399"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F310",
+      "symbolic_mnemonic": "F+",
+      "operands_syntax": "S1, S2, D",
+      "name": "Floating point data addition",
+      "steps": "14",
+      "category": "Floating-point instruction",
+      "manual_ref": "\"P. 27-5\"",
+      "full_syntax": "F310 (F+) S1, S2, D"
+    }
+  },
+  {
+    "step": 1285,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3382"
+      },
+      {
+        "raw": "DT3438"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1286,
+    "raw_mnemonic": "AND_GT",
+    "resolved_mnemonic": "AND>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3384"
+      },
+      {
+        "raw": "DT3425"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AND>",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1287,
+    "raw_mnemonic": "AND_GT",
+    "resolved_mnemonic": "AND>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3386"
+      },
+      {
+        "raw": "K0"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AND>",
+      "type": "basic",
+      "description": "32-bit data compare serial connection",
+      "steps": "9",
+      "manual_ref": "\"P.9-10\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1288,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1289,
+    "raw_mnemonic": "F26",
+    "resolved_mnemonic": "F26",
+    "inline_comment": "DSUB",
+    "operands": [
+      {
+        "raw": "DT3415"
+      },
+      {
+        "raw": "DT3386"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F26",
+      "symbolic_mnemonic": "D-",
+      "operands_syntax": "S, D",
+      "name": "32-bit data subtraction [D-S=D]",
+      "steps": "7",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-13\"",
+      "full_syntax": "F26 (D-) S, D"
+    }
+  },
+  {
+    "step": 1290,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1291,
+    "raw_mnemonic": "F133",
+    "resolved_mnemonic": "F133",
+    "inline_comment": "BTT",
+    "operands": [
+      {
+        "raw": "DT3387"
+      },
+      {
+        "raw": "K15"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F133",
+      "symbolic_mnemonic": "BTT",
+      "operands_syntax": "S, n",
+      "name": "Specified bit test",
+      "steps": "5",
+      "category": "Data receive instruction [MEWTOCOL master]",
+      "manual_ref": "\"P. 19-8\"",
+      "full_syntax": "F133 (BTT) S, n"
+    }
+  },
+  {
+    "step": 1292,
+    "raw_mnemonic": "AN/",
+    "resolved_mnemonic": "AN/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R900B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN/",
+      "type": "basic",
+      "description": "Connects a Form B (normally closed) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1293,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3386"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1294,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1295,
+    "raw_mnemonic": "ANF_GT",
+    "resolved_mnemonic": "ANF>",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "DT3438"
+      },
+      {
+        "raw": "SF0.0"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ANF>",
+      "type": "basic",
+      "description": "Single-precision floating point data compare serial connection",
+      "steps": "10",
+      "manual_ref": "\"P.9-16\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1296,
+    "raw_mnemonic": "SET",
+    "resolved_mnemonic": "SET",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R586"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "SET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1297,
+    "raw_mnemonic": "/",
+    "resolved_mnemonic": "/",
+    "inline_comment": null,
+    "operands": [],
+    "type": "basic",
+    "details": {
+      "mnemonic": "/",
+      "type": "basic",
+      "description": "Inverts the operation result",
+      "steps": "1",
+      "manual_ref": "\"P.2-10\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1298,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R51E"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1299,
+    "raw_mnemonic": "SET",
+    "resolved_mnemonic": "SET",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R587"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "SET",
+      "type": "basic",
+      "description": "Turns ON the output and holds it ON",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1300,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1301,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3374"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1302,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3438"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1303,
+    "raw_mnemonic": "OT",
+    "resolved_mnemonic": "OT",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OT",
+      "type": "basic",
+      "description": "Outputs the operation result",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1304,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R584"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1305,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1306,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R584"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1307,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1308,
+    "raw_mnemonic": "KP",
+    "resolved_mnemonic": "KP",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R586"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "KP",
+      "type": "basic",
+      "description": "Outputs with set and reset inputs",
+      "steps": "1",
+      "manual_ref": "\"P.2-47\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1309,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R585"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1310,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1311,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R585"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1312,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R50B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1313,
+    "raw_mnemonic": "KP",
+    "resolved_mnemonic": "KP",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R587"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "KP",
+      "type": "basic",
+      "description": "Outputs with set and reset inputs",
+      "steps": "1",
+      "manual_ref": "\"P.2-47\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1314,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R587"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1315,
+    "raw_mnemonic": "AN",
+    "resolved_mnemonic": "AN",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R586"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "AN",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact serially",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-11\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1316,
+    "raw_mnemonic": "RST",
+    "resolved_mnemonic": "RST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R586"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "RST",
+      "type": "basic",
+      "description": "Turns OFF the output and holds it OFF",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1317,
+    "raw_mnemonic": "RST",
+    "resolved_mnemonic": "RST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R587"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "RST",
+      "type": "basic",
+      "description": "Turns OFF the output and holds it OFF",
+      "steps": "3",
+      "manual_ref": "\"P.2-40\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1318,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1319,
+    "raw_mnemonic": "F33",
+    "resolved_mnemonic": "F33",
+    "inline_comment": "DDIV",
+    "operands": [
+      {
+        "raw": "DT3384"
+      },
+      {
+        "raw": "K4"
+      },
+      {
+        "raw": "DT3469"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F33",
+      "symbolic_mnemonic": "D%",
+      "operands_syntax": "S1, S2, D",
+      "name": "32-bit data division [S1/S2=D+1, D]",
+      "steps": "11",
+      "category": "BCD data arithmetic instructions",
+      "manual_ref": "\"P. 11-26\"",
+      "full_syntax": "F33 (D%) S1, S2, D"
+    }
+  },
+  {
+    "step": 1320,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3469"
+      },
+      {
+        "raw": "DT3391"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1321,
+    "raw_mnemonic": "ST/",
+    "resolved_mnemonic": "ST/",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R581"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST/",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form B (normally closed) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1322,
+    "raw_mnemonic": "OR",
+    "resolved_mnemonic": "OR",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R588"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "OR",
+      "type": "basic",
+      "description": "Connects a Form A (normally open) contact in parallel",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-16\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1323,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3397"
+      },
+      {
+        "raw": "DT3378"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1324,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3432"
+      },
+      {
+        "raw": "DT3376"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1325,
+    "raw_mnemonic": "F1",
+    "resolved_mnemonic": "F1",
+    "inline_comment": "DMV",
+    "operands": [
+      {
+        "raw": "DT3399"
+      },
+      {
+        "raw": "DT3380"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F1",
+      "symbolic_mnemonic": "DMV",
+      "operands_syntax": "DT90348, D",
+      "name": "Pulse output elapsed value write",
+      "steps": "7",
+      "category": "Logging/trace control instruction",
+      "manual_ref": "\"P.24-4\"",
+      "full_syntax": "F1 (DMV) DT90348, D"
+    }
+  },
+  {
+    "step": 1326,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "DT3366"
+      },
+      {
+        "raw": "DT3388"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1327,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1328,
+    "raw_mnemonic": "F0",
+    "resolved_mnemonic": "F0",
+    "inline_comment": "MV",
+    "operands": [
+      {
+        "raw": "K0"
+      },
+      {
+        "raw": "DT3373"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F0",
+      "symbolic_mnemonic": "MV",
+      "operands_syntax": "S, DT90052",
+      "name": "High-speed counter control",
+      "steps": "5",
+      "category": "High-speed counter instructions",
+      "manual_ref": "\"P.24-2\"",
+      "full_syntax": "F0 (MV) S, DT90052"
+    }
+  },
+  {
+    "step": 1329,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58B"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1330,
+    "raw_mnemonic": "F130",
+    "resolved_mnemonic": "F130",
+    "inline_comment": "BTS",
+    "operands": [
+      {
+        "raw": "DT3373"
+      },
+      {
+        "raw": "K0"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F130",
+      "symbolic_mnemonic": "BTS",
+      "operands_syntax": "D, n",
+      "name": "Specified bit set",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 19-2\"",
+      "full_syntax": "F130 (BTS) D, n"
+    }
+  },
+  {
+    "step": 1331,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R58A"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1332,
+    "raw_mnemonic": "F130",
+    "resolved_mnemonic": "F130",
+    "inline_comment": "BTS",
+    "operands": [
+      {
+        "raw": "DT3373"
+      },
+      {
+        "raw": "K1"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F130",
+      "symbolic_mnemonic": "BTS",
+      "operands_syntax": "D, n",
+      "name": "Specified bit set",
+      "steps": "5",
+      "category": "Bit manipulation instructions",
+      "manual_ref": "\"P. 19-2\"",
+      "full_syntax": "F130 (BTS) D, n"
+    }
+  },
+  {
+    "step": 1333,
+    "raw_mnemonic": "ST",
+    "resolved_mnemonic": "ST",
+    "inline_comment": null,
+    "operands": [
+      {
+        "raw": "R9010"
+      }
+    ],
+    "type": "basic",
+    "details": {
+      "mnemonic": "ST",
+      "type": "basic",
+      "description": "Begins a logic operation with a Form A (normally open) contact",
+      "steps": "1 (2)",
+      "manual_ref": "\"P.2-2\"",
+      "category": "Basic Instruction"
+    }
+  },
+  {
+    "step": 1334,
+    "raw_mnemonic": "F331",
+    "resolved_mnemonic": "F331",
+    "inline_comment": "ROFF",
+    "operands": [
+      {
+        "raw": "DT3438"
+      },
+      {
+        "raw": "DT3390"
+      }
+    ],
+    "type": "high_level",
+    "details": {
+      "fun_no": "F331",
+      "symbolic_mnemonic": "ROFF",
+      "operands_syntax": "S, D",
+      "name": "Convert floating point data to rounded 16-bit integer",
+      "steps": "8",
+      "category": "Real number data processing instructions",
+      "manual_ref": "\"P. 27-46\"",
+      "full_syntax": "F331 (ROFF) S, D"
+    }
+  },
+  {
+    "step": 1335,
+    "raw_mnemonic": "RET",
+    "resolved_mnemonic": "RET",
+    "inline_comment": null,
+    "operands": [],
+    "type": "basic",
+    "details": {
+      "mnemonic": "RET",
+      "type": "basic",
+      "description": "Ends the subroutine program and returns to the main program",
+      "steps": "1",
+      "manual_ref": "\"P.6-2\"",
+      "category": "Basic Instruction"
+    }
+  }
+]
