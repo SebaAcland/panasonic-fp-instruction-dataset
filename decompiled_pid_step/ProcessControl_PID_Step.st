@@ -1,21 +1,21 @@
 (*
  ==============================================================================
- Library Name : ProcessControl_PID_Step_INT (Copia Fiel Exacta Byte-a-Byte)
+ Library Name : ProcessControl_PID_Step_INT (Copia Fiel Exacta 1:1)
  Target       : IEC 61131-3 Structured Text (ST)
  Source       : Descompilación de SUB 13 (Pasos 1157 a 1335) de Panasonic FP
- Description  : Algoritmo completo de control PID paso a paso (Step/Floating)
-                incluyendo factor de escala K4, redondeos DROFF/ROFF,
-                detección de cambio de dirección por XOR, clamping de pulso
-                máximo/mínimo, interlock anti-overlap y empaquetado de bits en DUT.
+ Description  : Algoritmo de control PID paso a paso (Step / Floating)
+                incorporando la lectura del temporizador de hardware DT90019 (1ms),
+                acumulador delta diET (DT3374), filtro derivativo con polo Ti/4,
+                detección de inversión por XOR, clamping de carrera y empaquetado de DUT.
  ==============================================================================
 *)
 
 TYPE ProcessControl_PID_Step_INT_DUT :
     STRUCT
-        (* DT3268: Bit 0: IsNotFirstScan, Bit 1: ForwardCoolingOld *)
+        (* DT3268: Bit 0 = IsNotFirstScan, Bit 1 = ForwardDirectionOld *)
         w_bForwardCoolingOld_bIsNotFirstScan : WORD := 16#0000;
         
-        (* DDT3269: Tiempo acumulado de ejecución *)
+        (* DDT3269: Tiempo acumulado de integración/ejecución (ms) *)
         diET                     : DINT := 0;
         
         (* DDT3271: PV en scan anterior (PV n-1) *)
@@ -39,7 +39,7 @@ TYPE ProcessControl_PID_Step_INT_DUT :
         (* DT3283: Perturbación anterior *)
         iDisturbanceOld          : INT  := 0;
         
-        (* DT3284: Tiempo de ciclo previo *)
+        (* DT3284: Timestamp de scan previo (DT90019 n-1) *)
         iTOld                    : INT  := 0;
     END_STRUCT
 END_TYPE
@@ -57,6 +57,7 @@ VAR_INPUT
     iMotorRunTime      : INT;     (* Tiempo total de carrera del motor/válvula *)
     iMinPulseTime      : INT;     (* Tiempo mínimo de pulso permitido *)
     bForwardDirection  : BOOL;    (* TRUE = Directo / Calentamiento, FALSE = Inverso / Enfriamiento *)
+    iCurrentTimer_ms   : INT;     (* Lectura actual del reloj de hardware (Equivalente a DT90019 en Panasonic) *)
 END_VAR
 
 VAR_OUTPUT
@@ -72,6 +73,7 @@ END_VAR
 
 VAR
     (* Registros de trabajo temporal 32-bit (Equivalentes a DT3417..DT3473) *)
+    diDeltaTime_ms     : DINT;    (* DT3415: DT90019 actual - DT3389 previo *)
     diTs_x4            : DINT;    (* DT3417 = Ts * 4 *)
     diTi_x4            : DINT;    (* DT3419 = Ti * 4 *)
     diMotorRun_x4      : DINT;    (* DT3421 = MotorRunTime * 4 *)
@@ -114,6 +116,7 @@ IF NOT bEnable THEN
     iRemainingTime := 0;
     DUT.diStepRunTimeRemaining := 0;
     DUT.w_bForwardCoolingOld_bIsNotFirstScan := 16#0000;
+    DUT.iTOld      := iCurrentTimer_ms;
     RETURN;
 END_IF;
 
@@ -132,6 +135,14 @@ diMinPulse_x4 := INT_TO_DINT(iMinPulseTime) * 4;
 IF diMinPulse_x4 < 4 THEN
     diMinPulse_x4 := 4; (* Protección Paso 1181-1182: STD> K4 *)
 END_IF;
+
+(* Pasos 1192-1197: Cálculo de delta de tiempo transcurrido con temporizador de 1ms *)
+diDeltaTime_ms := INT_TO_DINT(iCurrentTimer_ms - DUT.iTOld);
+IF diDeltaTime_ms < 0 THEN
+    diDeltaTime_ms := diDeltaTime_ms + 65536; (* Manejo de overflow en timer 16-bit *)
+END_IF;
+DUT.diET  := DUT.diET + diDeltaTime_ms;
+DUT.iTOld := iCurrentTimer_ms;
 
 (* Pasos 1162-1165 / 1184-1185: Conversiones a punto flotante (FLT) *)
 rSP   := INT_TO_REAL(iSP);
@@ -156,6 +167,7 @@ IF NOT bIsNotFirstScan THEN
     rDeltaMV      := 0.0;
     rDeltaMV_prev := 0.0;
     diAccumResidual_x4 := 0;
+    DUT.diET      := 0;
 ELSE
     rDeltaMV_prev := DUT.rMV_diff;
 
